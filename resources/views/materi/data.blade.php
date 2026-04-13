@@ -130,14 +130,6 @@
 
     <hr>
 
-    <div class="video-wrapper">
-        <video controls>
-            <source src="{{ asset('video/data.mp4') }}" type="video/mp4">
-        </video>
-    </div>
-
-    <hr>
-
     <p class="section-text">
         Pernahkah kamu memperhatikan mengapa toko online bisa menampilkan produk
         yang mirip dengan barang yang baru saja kamu lihat? Menurutmu, apa yang

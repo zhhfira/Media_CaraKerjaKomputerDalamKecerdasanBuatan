@@ -13,10 +13,18 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
-        // ini tetap dipakai (punyamu jangan dihapus)
         $middleware->redirectGuestsTo('/login');
 
-        // ✅ tambah ini untuk middleware admin
+        $middleware->redirectUsersTo(function () {
+            if (auth()->check()) {
+                if (auth()->user()->usertype === 'admin') {
+                    return route('guru.dashboard');
+                }
+                return route('siswa.dashboard');
+            }
+            return '/';
+        });
+
         $middleware->alias([
             'admin' => AdminOnly::class,
             'student' => \App\Http\Middleware\StudentOnly::class,

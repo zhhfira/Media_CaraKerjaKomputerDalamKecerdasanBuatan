@@ -112,6 +112,7 @@ public function nilaisiswa()
         return (object) [
             'user_id'      => $user->id,
             'student_name' => $user->username,
+            'kelas'        => $user->kelas,
             'kuis1'        => $kuis1,
             'kuis2'        => $kuis2,
             'kuis3'        => $kuis3,

@@ -23,13 +23,6 @@
     </section>
     <hr>
 
-    <div class="video-wrapper">
-        <video controls>
-            <source src="{{ asset('video/ml.mp4') }}" type="video/mp4">
-        </video>
-    </div>
-    <hr>
-
     <!-- PARAGRAF PENGANTAR -->
     <p class="section-text">
         Pernahkah kamu menyadari bahwa komputer kini dapat mengenali wajah seseorang, memahami ucapan, bahkan memberikan rekomendasi lagu

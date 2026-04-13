@@ -56,43 +56,23 @@
 }
 
 @media (max-width: 600px) {
-  /* hapus rule table-siswa di sini, sudah ditangani di atas */
-
-  .table-siswa th,
-  .table-siswa td {
-    padding: 8px;
-    font-size: 12px;
-    white-space: nowrap; /* ← cegah teks wrap aneh */
-  }
-
-.search{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
+    .search{
+        flex-direction: column;
+        width: 100%;
+    }
+    .search input,
+    .search select,
+    .search button{
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+    .toolbar{
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
-.search input{
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.15);
-    outline: none;
-    flex: 1;           /* ← ikuti lebar container */
-    min-width: 0;      /* ← ganti dari 260px */
-    font-weight: 700;
-    box-sizing: border-box;
-}
-  .toolbar{
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-}
-
-}
 </style>
 @endpush
 
@@ -113,6 +93,15 @@
         </div>
         <div class="search">
             <input type="text" id="searchInput" placeholder="Cari nama siswa...">
+            <select id="kelasFilter"
+                style="padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.15);
+                    font-weight:700;background:#fff;outline:none;">
+                <option value="">Semua Kelas</option>
+                @foreach($siswa->pluck('kelas')->unique()->filter()->sort() as $kelas)
+                    <option value="{{ $kelas }}">Kelas {{ $kelas }}</option>
+                @endforeach
+            </select>
+
             <button onclick="exportPDF()"
                 style="padding:10px 14px;border-radius:10px;font-weight:400;
                        background:#1e8e5a;color:#fff;border:none;cursor:pointer;">
@@ -230,13 +219,28 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.style.cursor       = "pointer";
     }
 
-    searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase();
-        filteredRows  = rows.filter(row =>
-            row.children[1].textContent.toLowerCase().includes(keyword)
-        );
+    function applyFilter() {
+        const keyword = searchInput.value.toLowerCase();
+        const kelas   = document.getElementById("kelasFilter").value;
+
+        filteredRows = rows.filter(row => {
+            const nameMatch  = row.children[1].textContent.toLowerCase().includes(keyword);
+            const kelasMatch = !kelas || row.children[3].textContent.trim() === kelas;
+            return nameMatch && kelasMatch;
+        });
+
         currentPage = 1;
         renderTable();
+    }
+
+    // Listener search
+    searchInput.addEventListener("input", function () {
+        applyFilter();
+    });
+
+    // Listener filter kelas
+    document.getElementById("kelasFilter").addEventListener("change", function () {
+        applyFilter();
     });
 
     rowsPerPageSelect.addEventListener("change", function () {

@@ -182,72 +182,94 @@
     tr:not(:last-child) td {
       border-bottom: 1px solid #f2f2f2;
     }
-    @media (max-width: 600px){
+/* BURGER */
+.burger {
+    display: none;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
 
-    /* NAVBAR */
+@media (max-width: 600px){
+
+    /* HEADER */
     header{
-        flex-direction: column;
-        gap: 10px;
-        padding: 14px;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 16px;
+        position: relative;
     }
+
+    .logo{ font-size: 20px; }
+
+    .burger{ display: flex; }
 
     .nav-buttons{
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 8px 16px 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        z-index: 999;
     }
 
+    .nav-buttons.open{ display: flex; }
+
     .btn{
-        padding: 8px 14px;
-        font-size: 12px;
+        width: 100%;
+        text-align: center;
+        padding: 10px 14px;
+        font-size: 13px;
+        margin-left: 0 !important;
+    }
+
+    .btn-simple{
+        color: var(--primary) !important;
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        border-radius: 0;
+        padding: 12px 0;
+    }
+
+    .btn-primary,
+    .btn-outline{
+        margin-top: 6px;
+        border-radius: 10px;
     }
 
     /* CARD */
     .card{
-        margin: 20px 12px;
+        margin: 16px 12px;
         border-radius: 10px;
     }
 
-    .card-header{
-        padding: 18px 16px;
-    }
+    .card-header{ padding: 18px 16px; }
+    .card-body{ padding: 18px 16px; }
+    .judul{ font-size: 13px; }
+    h3{ font-size: 14px; }
+    p{ font-size: 12px; }
 
-    .card-body{
-        padding: 18px 16px;
-    }
+    /* TABLE → stack */
+    table, tr, td{ display: block; width: 100%; }
+    tr{ margin-bottom: 10px; }
+    td{ padding: 4px 0; font-size: 12px; }
+    td:first-child{ width: 100%; font-weight: 600; }
 
-    .judul{
-        font-size: 13px;
-    }
-
-    h3{
-        font-size: 14px;
-    }
-
-    p{
-        font-size: 12px;
-    }
-
-    /* TABLE jadi stack (WAJIB biar ga sempit) */
-    table, tr, td{
-        display: block;
-        width: 100%;
-    }
-
-    tr{
-        margin-bottom: 10px;
-    }
-
-    td{
-        padding: 4px 0;
-        font-size: 12px;
-    }
-
-    td:first-child{
-        width: 100%;
-        font-weight: 600;
-    }
+    /* Sembunyikan kolom titik dua */
+    td:nth-child(2){ display: none; }
 }
   </style>
 </head>
@@ -255,17 +277,21 @@
 <body>
 
   <!-- ===== NAVBAR ===== -->
-  <header>
+<header>
     <div class="logo">Inside AI</div>
 
-    <div class="nav-buttons">
+    <button class="burger" id="burgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-buttons" id="navButtons">
         <a href="{{ route('landing') }}" class="btn btn-simple">Beranda</a>
         <a href="" class="btn btn-simple">Petunjuk Pengerjaan</a>
         <a href="{{ route('tentang') }}" class="btn btn-simple">Tentang</a>
         <a href="{{ route('login.lihat') }}" class="btn btn-primary">Masuk</a>
         <a href="{{ route('register.lihat') }}" class="btn btn-outline">Daftar</a>
     </div>
-  </header>
+</header>
 
   <!-- ===== KONTEN TENTANG ===== -->
   <div class="card">
@@ -327,13 +353,28 @@
       </table>
     </div>
   </div>
-
   <div class="card">
     <div class="card-body">
       <h3>Daftar Pustaka dan Atribusi</h3>
       <p>Ilustrasi pada media pembelajaran diadaptasi dari storyset.com/work.</p>
     </div>
   </div>
+<script>
+    const burgerBtn  = document.getElementById('burgerBtn');
+    const navButtons = document.getElementById('navButtons');
 
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navButtons.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => {
+        navButtons.classList.remove('open');
+    });
+
+    navButtons.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+</script>
 </body>
 </html>

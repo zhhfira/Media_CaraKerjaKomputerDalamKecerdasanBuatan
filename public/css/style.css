@@ -43,7 +43,7 @@ body{
   display: flex;
   flex-direction: column;
   padding: 14px 12px;
-    overflow-y: scroll;
+  overflow-y: scroll;
 
   font-size: 13.5px;
 }

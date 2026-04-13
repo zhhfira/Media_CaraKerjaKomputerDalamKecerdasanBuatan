@@ -675,8 +675,8 @@ td:last-child{
 </div>
 
 <div class="bottom-bar">
-    <a href="{{ route('quiz.show', 4) }}" class="btn-next">
-        Materi Selanjutnya
+    <a href="{{ route('quiz.show',  ['quiz' => 4]) }}" class="btn-next">
+        Uji Pemahamanmu!
         <i class="fa-solid fa-arrow-right"></i>
     </a>
 </div>

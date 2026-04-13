@@ -813,20 +813,36 @@ function tampilkanPopupBadge(badge) {
     `;
     popup.innerHTML = `
         <div style="background: white; border-radius: 16px; padding: 2rem;
-                    text-align: center; max-width: 280px; width: 90%;
+                    text-align: center; max-width: 300px; width: 90%;
                     font-family: Poppins, sans-serif;">
-            <p style="font-weight: 700; font-size: 1.1rem; margin: 0 0 0.5rem;">
-                Badge Baru Didapat!
+
+            {{-- Judul --}}
+            <p style="font-weight: 800; font-size: 1.1rem; margin: 0 0 0.2rem; color: #000B58;">
+                Kamu Mendapatkan Badge!
             </p>
+
+            {{-- Nama badge --}}
+            <p style="font-weight: 700; font-size: 1rem; color: #1e8e5a; margin: 0 0 1rem;">
+                "${badge.name}"
+            </p>
+
+            {{-- Gambar badge --}}
             <img src="/img/badges/${badge.image}"
-                 style="width: 100px; height: 100px; margin: 1rem auto; display: block;">
-            <p style="color: #555; margin-bottom: 1rem; font-weight: 600;">
-                ${badge.name}
+                style="width: 120px; height: 120px; margin: 0 auto 1rem; display: block;">
+
+            {{-- Kalimat deskripsi — edit bagian ini sesuai kebutuhanmu --}}
+            <p style="font-size: 13px; color: #555; margin: 0 0 0.5rem; line-height: 1.6;">
+                Atas keberhasilanmu menyelesaikan kuis dengan nilai memenuhi KKM pada materi ini.
             </p>
+            <p style="font-size: 13px; color: #1e8e5a; font-weight: 700; margin: 0 0 1.2rem;">
+                Terus semangat belajar!
+            </p>
+
+            {{-- Tombol --}}
             <button onclick="this.closest('div').parentElement.remove()"
                     style="padding: 0.5rem 1.5rem; background: #1e8e5a;
-                           color: white; border: none; border-radius: 8px;
-                           cursor: pointer; font-weight: 700; font-family: Poppins, sans-serif;">
+                          color: white; border: none; border-radius: 8px;
+                          cursor: pointer; font-weight: 700; font-family: Poppins, sans-serif;">
                 Terima Badge
             </button>
         </div>

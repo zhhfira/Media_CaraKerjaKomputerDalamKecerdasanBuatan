@@ -438,7 +438,7 @@ button:disabled{
 
 <div class="bottom-bar">
     <a href="{{ route('quiz.show', ['quiz' => 1]) }}" class="btn-next">
-        Materi Selanjutnya
+        Uji Pemahamanmu!
         <i class="fa-solid fa-arrow-right"></i>
     </a>
 </div>

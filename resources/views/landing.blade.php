@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>CompuThink - Bagaimana Komputer Bepikir?</title>
+    <title>Inside AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,73 +225,96 @@
             font-weight: 600;
         }
 
-/* ================= MOBILE (HP) ================= */
-@media (max-width: 600px){
+/* BURGER BUTTON */
+.burger {
+    display: none;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
 
-    header{
+@media (max-width: 600px) {
+
+    /* HEADER */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 16px;
+        position: relative;
+    }
+
+    .logo { font-size: 20px; }
+
+    /* Tampilkan burger */
+    .burger {
+        display: flex;
+    }
+
+    /* Nav tersembunyi by default */
+    .nav-buttons {
+        display: none;
         flex-direction: column;
-        gap: 10px;
-        padding: 12px;
-        text-align: center;
-    }
-
-    .logo{
-        font-size: 20px;
-    }
-
-    .nav-buttons{
-        flex-wrap: wrap;
-        justify-content: center;
         gap: 8px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        z-index: 999;
     }
 
-    .btn{
-        padding: 8px 14px;
-        font-size: 12px;
+    /* Saat aktif / terbuka */
+    .nav-buttons.open {
+        display: flex;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px 14px;
+        font-size: 13px;
+        margin-left: 0 !important;
+    }
+
+    .btn-simple {
+        color: var(--primary) !important;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        border-radius: 0;
+        padding: 10px 0;
     }
 
     /* HERO */
-    .hero{
+    .hero {
         flex-direction: column;
-        padding: 40px 16px;
-        gap: 30px;
+        padding: 30px 16px;
+        gap: 20px;
         text-align: center;
     }
+    .hero-title { font-size: 20px; }
+    .hero-desc { font-size: 13px; }
+    .hero-buttons { justify-content: center; }
+    .hero-image img { max-width: 200px; }
 
-    .hero-title{
-        font-size: 22px;
-    }
-
-    .hero-desc{
-        font-size: 13px;
-    }
-
-    .hero-image img{
-        max-width: 220px;
-    }
-
-    /* FEATURE */
-    .features{
-        padding: 30px 16px;
-    }
-
-    .features-title{
-        font-size: 16px;
-    }
-
-    .feature-card{
-        padding: 20px 16px;
-    }
-
-    .feature-title{
-        font-size: 14px;
-    }
-
-    .feature-desc{
-        font-size: 12px;
-    }
+    /* FEATURES */
+    .features { padding: 24px 16px; }
+    .features-title { font-size: 16px; margin-bottom: 20px; }
+    .feature-grid { grid-template-columns: 1fr !important; }
+    .feature-card-materi:last-child { grid-column: auto !important; }
+    .feature-card, .feature-card-materi { padding: 18px 16px; }
+    .feature-title { font-size: 14px; }
+    .feature-desc { font-size: 12px; }
 }
-/* ================= TABLET ================= */
+                                        
 @media (min-width: 601px) and (max-width: 1024px){
 
     header{
@@ -316,7 +339,6 @@
         padding: 40px 4%;
     }
 }
-/* ================= DESKTOP BESAR ================= */
 @media (min-width: 1200px){
 
     .hero{
@@ -342,12 +364,19 @@
 
 <header>
     <div class="logo">Inside AI</div>
-    <div class="nav-buttons">
+
+    <!-- Tombol burger (hanya muncul di HP) -->
+    <button class="burger" id="burgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Nav links -->
+    <div class="nav-buttons" id="navButtons">
         <a href="{{ route('landing') }}" class="btn btn-simple">Beranda</a>
         <a href="" class="btn btn-simple">Petunjuk Pengerjaan</a>
         <a href="{{ route('tentang') }}" class="btn btn-simple">Tentang</a>
         <a href="{{ route('login.lihat') }}" class="btn btn-primary">Masuk</a>
-        <a href="{{ route('register.lihat') }}" class="btn btn-outline" style="color: black">Daftar</a>
+        <a href="{{ route('register.lihat') }}" class="btn btn-outline" style="color:black">Daftar</a>
     </div>
 </header>
 
@@ -431,7 +460,7 @@
     </div>
 </section>
 <footer>
-    CompuThink © 2026 PilkomMedia
+    Inside AI © 2026 PilkomMedia
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
@@ -478,6 +507,25 @@ tsParticles.load("finisher-background", {
     },
     detectRetina: true
 });
+</script>
+<script>
+    const burgerBtn  = document.getElementById('burgerBtn');
+    const navButtons = document.getElementById('navButtons');
+
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navButtons.classList.toggle('open');
+    });
+
+    /* Klik di luar → tutup menu */
+    document.addEventListener('click', () => {
+        navButtons.classList.remove('open');
+    });
+
+    /* Cegah klik dalam nav menutup dirinya sendiri */
+    navButtons.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 </script>
 </body>
 </html>

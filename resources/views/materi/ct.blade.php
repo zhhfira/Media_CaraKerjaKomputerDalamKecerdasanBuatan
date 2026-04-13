@@ -23,13 +23,6 @@
     </section>
     <hr>
 
-    <div class="video-wrapper">
-        <video controls>
-            <source src="{{ asset('video/ct.mp4') }}" type="video/mp4">
-        </video>
-    </div>
-    <hr>
-
     <!-- PARAGRAF PENGANTAR -->
     <p class="section-text">
         Pernahkah kamu bertanya-tanya bagaimana Google Maps bisa menentukan rute tercepat? Pernahkah kamu menghadapi masalah yang rumit dan tidak tahu harus memulai dari mana? Ternyata, ada cara berpikir yang dapat membantu menyelesaikan masalah secara logis dan terstruktur, seperti halnya komputer memproses informasi. Semua itu menggunakan cara berpikir yang disebut <i>Computational Thinking</i>. Melalui bagian ini, kamu akan mengenal <i>Computational Thinking</i>, yaitu kemampuan berpikir sistematis yang membantu seseorang memecahkan permasalahan dengan langkah yang efisien dan dapat diterapkan dalam berbagai situasi.

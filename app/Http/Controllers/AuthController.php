@@ -41,6 +41,14 @@ class AuthController extends Controller
 
     public function loginLihat()
     {
+         // Jika sudah login, redirect ke dashboard sesuai role
+        if (Auth::check()) {
+            if (Auth::user()->usertype === 'admin') {
+                return redirect()->route('guru.dashboard');
+            }
+            return redirect()->route('siswa.dashboard');
+        }
+
         return view('auth.login');
     }
 

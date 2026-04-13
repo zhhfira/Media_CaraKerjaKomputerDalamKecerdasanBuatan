@@ -50,7 +50,24 @@
 .instruction li{ margin-bottom:8px; line-height:1.6; }
 .path{ position:absolute; height:5px; background:repeating-linear-gradient(to right,#a5b4fc 0 12px,transparent 12px 22px); transform-origin:left center; animation:pathMove 1.4s linear infinite; filter:drop-shadow(0 0 10px rgba(165,180,252,1)); z-index:1; pointer-events:none; }
 @keyframes pathMove{ to{ background-position:-20px 0; } }
-.bubble{ position:fixed; right:32px; bottom:32px; z-index:999; width:420px; max-height:70vh; overflow-y:auto; background:linear-gradient(180deg,#0f172a,#020617); border-radius:18px; padding:22px 24px; animation:bubbleIn .25s ease-out; border:1px solid rgba(99,102,241,.35); box-shadow:0 20px 40px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.03); color:#e5e7eb; }
+.bubble {
+    position: fixed;
+    z-index: 999;
+    background: linear-gradient(180deg, #0f172a, #020617);
+    border-radius: 18px;
+    padding: 22px 24px;
+    animation: bubbleIn .25s ease-out;
+    border: 1px solid rgba(99, 102, 241, .35);
+    box-shadow: 0 20px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+    color: #e5e7eb;
+
+    /* Desktop: pojok kanan bawah */
+    right: 32px;
+    bottom: 32px;
+    width: 420px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
 @keyframes bubbleIn{ from{ opacity:0; transform:translateY(10px) scale(.98); } to{ opacity:1; transform:none; } }
 .bubble p{ font-size:13.5px; line-height:1.75; color:#d1d5db; margin-bottom:14px; }
 .bubble-title{ font-size:16px; font-weight:700; color:#c7d2fe; margin-bottom:10px; line-height:1.4; }
@@ -75,6 +92,7 @@
 .algoritma-tab{ border:1px solid #d1d5db; background:#fff; padding:6px 12px; border-radius:999px; font-size:12.5px; font-weight:700; cursor:pointer; }
 .algoritma-tab.active{ background:rgba(0,106,103,.12); border-color:rgba(0,106,103,.35); color:#064e4b; }
 .algoritma-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
 @media(max-width:900px){ .algoritma-grid{ grid-template-columns:1fr; } }
 .algoritma-card{ background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:14px; }
 .algoritma-step{ font-size:14px; font-weight:800; margin-bottom:8px; }
@@ -84,6 +102,18 @@
 .algoritma-controls button{ padding:7px 14px; font-size:12.5px; border-radius:999px; border:none; cursor:pointer; font-weight:700; }
 .algoritma-controls .prev{ background:#0f172a; color:#fff; }
 .algoritma-controls .next{ background:#006A67; color:#fff; }
+@media (max-width: 600px) {
+    .bubble {
+        right: auto;
+        bottom: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 88vw;
+        max-height: 75vh;
+        padding: 16px;
+    }
+}
 </style>
 @endpush
 
@@ -227,8 +257,8 @@
 </div>
 
 <div class="bottom-bar">
-    <a href="{{ route('materi.ml') }}" class="btn-next">
-        Materi Selanjutnya <i class="fa-solid fa-arrow-right"></i>
+    <a href="{{ route('quiz.show',  ['quiz' => 2]) }}" class="btn-next">
+        Uji Pemahamanmu! <i class="fa-solid fa-arrow-right"></i>
     </a>
 </div>
 @endsection
@@ -439,6 +469,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showBubble(i) {
         bubble?.remove();
+        document.getElementById('bubbleOverlay')?.remove(); // hapus overlay lama
+
+        // Overlay (hanya HP)
+        if (window.innerWidth <= 600) {
+            const overlay = document.createElement('div');
+            overlay.id = 'bubbleOverlay';
+            overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:998;';
+            overlay.onclick = closeBubble;
+            document.body.appendChild(overlay);
+        }
+
         bubble = document.createElement("div");
         bubble.className = "bubble show";
         bubble.innerHTML = `
@@ -450,7 +491,6 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>`;
         document.body.appendChild(bubble);
 
-        // Pasang event listener langsung — tidak pakai onclick di HTML
         document.getElementById("btnCloseB").addEventListener("click", closeBubble);
         const btnNext = document.getElementById("btnNext");
         if (btnNext) btnNext.addEventListener("click", nextStep);
@@ -459,6 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function closeBubble() {
         bubble?.remove();
         bubble = null;
+        document.getElementById('bubbleOverlay')?.remove();
     }
 
     function nextStep() {

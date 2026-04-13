@@ -145,13 +145,6 @@
     </section>
     <hr>
 
-    <div class="video-wrapper">
-        <video controls>
-            <source src="{{ asset('video/algo.mp4') }}" type="video/mp4">
-        </video>
-    </div>
-    <hr>
-
     <!-- PARAGRAF PENGANTAR -->
     <p class="section-text">
         Bayangkan kamu sedang menuliskan resep membuat mie instan. Langkah apa yang harus dilakukan terlebih dahulu agar hasilnya sesuai?

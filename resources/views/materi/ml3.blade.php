@@ -306,8 +306,8 @@
 </div>
 
 <div class="bottom-bar">
-    <a href="{{ route('materi.ct') }}" class="btn-next">
-        Materi Selanjutnya
+    <a href="{{ route('quiz.show',  ['quiz' => 3]) }}" class="btn-next">
+        Uji Pemahamanmu!
         <i class="fa-solid fa-arrow-right"></i>
     </a>
 </div>

@@ -79,7 +79,7 @@
 }
 @media(max-width:600px){
     .toolbar{ flex-direction:column; align-items:stretch; }
-    .search{ width:100%; }
+    .search{ width:100%; flex-direction:column; }
     .filter-select{ min-width:0; width:100%; }
     .table th, .table td{ font-size:11px; padding:8px; }
 }
@@ -103,6 +103,16 @@
         </div>
         <div class="search">
             <input type="text" id="searchInput" placeholder="Cari nama siswa..." oninput="filterRows(this.value)">
+            
+            <select id="kelasFilter" onchange="filterRows()"
+            style="padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.15);
+                   font-weight:700;background:#fff;outline:none;">
+            <option value="">Semua Kelas</option>
+            @foreach($rekap->pluck('kelas')->unique()->filter()->sort() as $kelas)
+                <option value="{{ $kelas }}">Kelas {{ $kelas }}</option>
+            @endforeach
+            </select>
+
             <button onclick="exportPDF()"
                 style="padding:10px 14px;border-radius:10px;font-weight:400;
                        background:#1e8e5a;color:#fff;border:none;cursor:pointer;">
@@ -117,6 +127,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Siswa</th>
+                    <th>Kelas</th>
                     <th>Kuis 1</th>
                     <th>Kuis 2</th>
                     <th>Kuis 3</th>
@@ -128,9 +139,10 @@
             </thead>
             <tbody>
                 @foreach($rekap as $i => $r)
-                <tr>
+                <tr data-kelas="{{ $r->kelas }}">
                     <td>{{ $i+1 }}</td>
                     <td><b>{{ $r->student_name }}</b></td>
+                    <td>{{ $r->kelas ?? '-' }}</td>
                     <td>{{ $r->kuis1 ?? '-' }}</td>
                     <td>{{ $r->kuis2 ?? '-' }}</td>
                     <td>{{ $r->kuis3 ?? '-' }}</td>
@@ -199,15 +211,17 @@ function applyFilters() {
     });
 }
 
-function filterRows()    { applyFilters(); }
-function filterByQuiz(v) { selectedQuizId = v || ""; applyFilters(); }
-function resetFilter()   {
-    const input  = document.getElementById("searchInput");
-    const select = document.getElementById("quizFilter");
-    if (input)  input.value  = "";
-    if (select) select.value = "";
-    selectedQuizId = "";
-    applyFilters();
+function filterRows() {
+    const keyword = (document.getElementById("searchInput")?.value || "").toLowerCase();
+    const kelas   = document.getElementById("kelasFilter")?.value || "";
+    const rows    = document.querySelectorAll("#nilaiTable tbody tr");
+
+    rows.forEach(r => {
+        const name    = (r.children[1]?.textContent || "").toLowerCase();
+        const okName  = name.includes(keyword);
+        const okKelas = !kelas || r.getAttribute("data-kelas") === kelas;
+        r.style.display = (okName && okKelas) ? "" : "none";
+    });
 }
 
 // ===== POPUP BUBBLE =====
