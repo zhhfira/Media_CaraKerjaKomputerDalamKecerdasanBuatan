@@ -24,6 +24,13 @@
         </li>
 
         <li>
+            <a class="menu-link {{ request()->routeIs('guru.progresSiswa') || request()->routeIs('guru.progresSiswa.detail') ? 'active' : '' }}"
+               href="{{ route('guru.progresSiswa') }}">
+                <i class="fa-solid fa-chart-line"></i> Progres Siswa
+            </a>
+        </li>
+        
+        <li>
             <a class="menu-link {{ request()->routeIs('guru.quizzes.*') ? 'active' : '' }}"
                href="{{ route('guru.quizzes.index') }}">
                 <i class="fa-solid fa-clipboard-list"></i> Kelola Kuis & Evaluasi

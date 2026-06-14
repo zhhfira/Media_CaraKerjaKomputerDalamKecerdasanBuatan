@@ -125,5 +125,54 @@ public function nilaisiswa()
 
     return view('guru.nilaisiswa', compact('rekap'));
 }
+public function progresSiswa()
+{
+    $siswa = User::where('usertype', 'user')
+        ->with(['point', 'badges'])
+        ->orderBy('created_at')
+        ->get();
+
+    $quizzes = Quiz::orderBy('id')->get();
+
+    $data = $siswa->map(function ($user) use ($quizzes) {
+
+        // Skor tertinggi per quiz
+        $bestScores = QuizAttempt::where('user_id', $user->id)
+            ->selectRaw('quiz_id, MAX(score) as best_score')
+            ->groupBy('quiz_id')
+            ->pluck('best_score', 'quiz_id');
+
+        // Quiz yang sudah dikerjakan
+        $quizDikerjakan = $bestScores->count();
+
+        // Total progress materi
+        $totalMateri    = \App\Models\MateriProgress::where('user_id', $user->id)->count();
+
+        // XP & level
+        $xp = $user->point->total_xp ?? 0;
+        $levelNum = $user->point->level ?? 1;
+        $gamification = new \App\Services\GamificationService();
+        $levelLabel = $gamification->getLevelName($levelNum);
+        $level = ['level' => $levelNum, 'label' => $levelLabel];
+
+        // Persentase progress (dari 19 item: 14 materi + 5 quiz)
+        $totalItem  = 19;
+        $quizLulus  = $bestScores->filter(fn($s) => $s >= 75)->count();
+        $progres    = round((($totalMateri + $quizLulus) / $totalItem) * 100);
+
+        return (object) [
+            'user'           => $user,
+            'xp'             => $xp,
+            'level'          => $level,
+            'badges'         => $user->badges,
+            'quiz_dikerjakan'=> $quizDikerjakan,
+            'total_materi'   => $totalMateri,
+            'progres'        => min($progres, 100),
+            'best_scores'    => $bestScores,
+        ];
+    });
+
+    return view('guru.progres-siswa', compact('data', 'quizzes'));
+}
 
 }

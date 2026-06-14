@@ -1,7 +1,7 @@
 @extends('layouts.siswa')
 
 @section('title', 'Algoritma dalam AI')
-@section('topbar', 'Algoritma: Resep Rahasia Kecerdasan Buatan')
+@section('topbar', 'Peran Algoritma dalam Sistem Komputer')
 
 @push('styles')
 <style>
@@ -114,24 +114,32 @@
         padding: 16px;
     }
 }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
 
-    <h3>2. Bagaimana Algoritma Bekerja dalam Kecerdasan Buatan?</h3>
+    <h3 class="content-title">2. Cara Kerja Algoritma pada Sistem Komputer</h3>
 
     <p class="style-materi">
-        Setelah memahami pengertian dan pentingnya algoritma, kini saatnya kamu mempelajari
-        bagaimana algoritma bekerja dalam sistem kecerdasan buatan (AI). Pernahkah kamu
-        bertanya-tanya, bagaimana komputer bisa menebak bahwa gambar yang kamu tunjuk
-        adalah kucing atau anjing?
+        Setelah memahami pengertian dan pentingnya algoritma, kini saatnya kamu mempelajari bagaimana algoritma bekerja dalam sistem kecerdasan buatan (AI). Pernahkah terpikir bagaimana komputer dapat mengenali bahwa sebuah gambar menunjukkan Soto Banjar atau iwak haruan?
     </p>
 
     <p class="style-materi">
-        Ternyata, komputer tidak memiliki "insting", tetapi mengikuti serangkaian langkah sistematis yang disebut <b>algoritma</b>. Dalam dunia kecerdasan buatan, komputer tidak berpikir seperti manusia, melainkan mengikuti serangkaian langkah logis dan terurut untuk menyelesaikan suatu masalah.
-        Setiap langkah diatur secara berurutan agar komputer bisa mengambil keputusan berdasarkan logika, bukan perasaan. Karena itu, bisa dikatakan bahwa algoritma adalah "otak logis" dari kecerdasan buatan, yang membuat komputer mampu melakukan tugas-tugas cerdas seperti mengenali wajah, menerjemahkan bahasa, hingga merekomendasikan video di YouTube.
+        Pada dasarnya, komputer tidak memiliki insting seperti manusia, melainkan bekerja dengan mengikuti serangkaian langkah sistematis yang disebut algoritma. Dalam dunia kecerdasan buatan, komputer tidak berpikir seperti manusia, melainkan mengikuti serangkaian langkah logis dan terurut untuk menyelesaikan suatu masalah. Setiap langkah diatur secara berurutan agar komputer bisa mengambil keputusan berdasarkan logika, bukan perasaan. Karena itu, bisa dikatakan bahwa algoritma adalah "otak logis" dari kecerdasan buatan, yang membuat komputer mampu melakukan tugas-tugas cerdas seperti mengenali wajah, menerjemahkan bahasa, hingga merekomendasikan video di YouTube.
     </p>
 
     <p class="style-materi">
@@ -173,7 +181,16 @@
     </p>
 
     <section class="algoritma-sim">
-        <h2>Simulasi 4 Tahap Algoritma dalam Kecerdasan Buatan</h2>
+        <h2>Aktivitas Interaktif: Simulasi 4 Tahap Algoritma dalam Kecerdasan Buatan ⚙️</h2>
+        <p><b>Tujuan Aktivitas:</b> Peserta didik memahami tahapan kerja algoritma dalam kecerdasan buatan melalui proses input, proses, keputusan, dan output.
+        </p>
+        <p><b>Langkah aktivitas:</b><br>
+            1.	Isilah nilai pada kolom kosong yang tersedia pada tahap input. <br>
+            2.	Amati bagaimana komputer memproses data tersebut. <br>
+            3.	Perhatikan keputusan yang dihasilkan sistem. <br>
+            4.	Amati output akhir yang ditampilkan komputer. <br>
+        </p>
+
         <p>Amati bagaimana komputer bekerja melalui urutan: <b>Input → Proses → Keputusan → Output</b>.</p>
 
         <div class="algoritma-progress">
@@ -212,7 +229,7 @@
     <section class="activity-frame">
         <div class="activity-label">Aktivitas Interaktif: <b>"Menyusun Langkah Logis"</b></div>
 
-        <p>Dalam kecerdasan buatan (AI), komputer hanya dapat "berpikir" jika mengikuti langkah-langkah logis yang disebut algoritma.</p>
+        <p>Dalam kecerdasan buatan (AI), komputer hanya dapat bekerja jika mengikuti langkah-langkah logis yang disebut algoritma.</p>
         <p>Pada aktivitas ini, kamu akan berperan sebagai otak komputer dan mencoba menyusun langkah-langkah tersebut secara berurutan agar kecerdasan buatan dapat bekerja dengan benar.</p>
         <p><b>Instruksi:</b> Kelompokkan setiap komponen kegiatan berikut ke dalam urutan langkah yang sesuai.</p>
 
@@ -250,7 +267,7 @@
         <div id="hasil" class="hasil" aria-live="polite"></div>
 
         <div id="feedback-penutup" class="feedback-penutup">
-            Dari aktivitas menyusun langkah-langkah kerja komputer, kamu telah melihat bahwa sebuah algoritma hanya dapat berjalan dengan baik jika urutannya benar. Setiap langkah—mulai dari mengumpulkan data, memberi label, melatih model, hingga menguji hasil—harus dilakukan secara sistematis. Jika satu langkah saja ditempatkan tidak pada urutannya, maka komputer bisa menghasilkan keputusan yang salah. Aktivitas ini menunjukkan bahwa algoritma bukan sekadar daftar perintah, tetapi <b>rangkaian proses logis yang saling bergantung</b> untuk membantu komputer "berpikir" dan menyelesaikan tugas dengan tepat.
+            Dari aktivitas menyusun langkah-langkah kerja komputer, kamu telah melihat bahwa sebuah algoritma hanya dapat berjalan dengan baik jika urutannya benar. Setiap langkah—mulai dari mengumpulkan data, memberi label, melatih model, hingga menguji hasil—harus dilakukan secara sistematis. Jika satu langkah saja ditempatkan tidak pada urutannya, maka komputer bisa menghasilkan keputusan yang salah. Aktivitas ini menunjukkan bahwa algoritma bukan sekadar daftar perintah, tetapi <b>rangkaian proses logis yang saling bergantung</b> untuk membantu komputer bekerja dan menyelesaikan tugas dengan tepat.
         </div>
     </section>
 
@@ -264,6 +281,46 @@
 @endsection
 
 @push('scripts')
+<script>
+/* =============================================
+   AUDIO FEEDBACK 
+============================================= */
+function playCorrect(){
+    new Audio("{{ asset('audio/benar.mp3') }}").play().catch(() => {});
+}
+
+function playWrong(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+
+function playIncomplete(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+</script>
+<script>
+const MATERI_KEY = "algoritma.ai"; // 
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
 <script>
 // ========== SEMUA SCRIPT DALAM DOMContentLoaded ==========
 document.addEventListener("DOMContentLoaded", function () {
@@ -310,15 +367,18 @@ document.addEventListener("DOMContentLoaded", function () {
         hasil.style.display = "block";
         if (terisi < 5) {
             hasil.classList.add("bad");
+            playIncomplete();
             hasil.innerHTML = `❗ Kamu baru mengisi <b>${terisi}/5</b> langkah.`;
             feedbackPenutup.style.display = "none";
             return;
         }
         if (benar === 5) {
+            playCorrect();
             hasil.classList.remove("bad"); hasil.classList.add("ok");
             hasil.innerHTML = `✅ <b>Semua langkah sudah benar!</b>`;
             feedbackPenutup.style.display = "block";
         } else {
+            playWrong();
             hasil.classList.remove("ok"); hasil.classList.add("bad");
             hasil.innerHTML = `❌ Masih ada langkah yang belum tepat.`;
             feedbackPenutup.style.display = "none";

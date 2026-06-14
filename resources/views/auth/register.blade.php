@@ -241,6 +241,15 @@
             </div>
 
             <div class="form-group">
+                <label class="form-label" for="nis">NISN</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><i class="fa-regular fa-id-card"></i></span>
+                    <input type="text" id="nisn" name="nisn" class="form-input"
+                           placeholder="Cth 9990123456" value="{{ old('nisn') }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label" for="email">Email</label>
                 <div class="input-wrapper">
                     <span class="input-icon"><i class="fa-regular fa-envelope"></i></span>

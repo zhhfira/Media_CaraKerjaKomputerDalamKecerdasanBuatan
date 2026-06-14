@@ -143,9 +143,37 @@
             flex-wrap: wrap;
         }
 
+        /* Ganti dengan ini: */
+        .hero-image {
+            position: relative;
+        }
         .hero-image img {
             max-width: 300px;
             width: 100%;
+            animation: floatImage 4s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0, 195, 255, 0.3));
+        }
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 18px;
+            background: radial-gradient(ellipse, rgba(0,195,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: shadowPulse 4s ease-in-out infinite;
+        }
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25%       { transform: translateY(-14px) rotate(1.5deg); }
+            75%       { transform: translateY(-7px) rotate(-1deg); }
+        }
+        @keyframes shadowPulse {
+            0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 0.6; }
+            25%       { transform: translateX(-50%) scaleX(0.65); opacity: 0.25; }
+            75%       { transform: translateX(-50%) scaleX(0.8);  opacity: 0.4; }
         }
 
         img{
@@ -242,6 +270,7 @@
 
 @media (max-width: 600px) {
 
+    .hero-image img { max-width: 180px; }
     /* HEADER */
     header {
         flex-direction: row;
@@ -373,7 +402,7 @@
     <!-- Nav links -->
     <div class="nav-buttons" id="navButtons">
         <a href="{{ route('landing') }}" class="btn btn-simple">Beranda</a>
-        <a href="" class="btn btn-simple">Petunjuk Pengerjaan</a>
+        <a href="{{ route('petunjuk') }}" class="btn btn-simple">Petunjuk Penggunaan</a>
         <a href="{{ route('tentang') }}" class="btn btn-simple">Tentang</a>
         <a href="{{ route('login.lihat') }}" class="btn btn-primary">Masuk</a>
         <a href="{{ route('register.lihat') }}" class="btn btn-outline" style="color:black">Daftar</a>
@@ -384,7 +413,7 @@
     <div class="hero-text">
         <p class="hero-subtitle">Media Pembelajaran Interaktif</p>
 
-        <h1 class="hero-title">Cara Kerja Komputer dalam Kecerdasan Buatan</h1>
+        <h1 class="hero-title">Cara Kerja Sistem Komputer dalam Kecerdasan Buatan</h1>
 
         <p class="hero-desc">
             Pelajari bagaimana komputer bekerja dalam sistem kecerdasan buatan (AI), mulai dari menerima dan memproses data, menjalankan algoritma, hingga menghasilkan keputusan atau prediksi melalui penerapan cara berpikir komputasional yang sistematis dan terstruktur.        
@@ -425,36 +454,39 @@
     <h2 class="features-title">Materi Pembelajaran</h2>
     <div class="feature-grid">
         <div class="feature-card-materi">
-            <h3 class="feature-title">Data: Bahan Bakar Utama Kecerdasan Buatan</h3>
+            <h3 class="feature-title">Peran Data dalam Sistem Komputer</h3>
             <ul style="font-size: 12px; text-align:left;padding-left: 20px;">
-                <li>Konsep Data</li>
+                <li>Pengenalan Data</li>
                 <li>Pentingnya Data</li>
+                <li>Bias Dalam Data</li>
                 <li>Dataset dan Labeling</li>
             </ul>
         </div>
 
         <div class="feature-card-materi">
-            <h3 class="feature-title">Algoritma: Resep Rahasia AI</h3>
+            <h3 class="feature-title">Peran Algoritma dalam Sistem Komputer</h3>
             <ul style="font-size: 12px; text-align:left;padding-left: 20px;">
-                <li>Konsep Algoritma</li>
-                <li>Bagaimana Algoritma Bekerja dalam Kecerdasan Buatan?</li>
+                <li>Pengenalan Algoritma</li>
+                <li>Cara Kerja Algortima pada Sistem Komputer</li>
             </ul>
         </div>
 
         <div class="feature-card-materi">
-            <h3 class="feature-title"><i>Machine Learning</i>: Komputer yang Belajar</h3>
+            <h3 class="feature-title">Proses Pembelajaran Mesin dalam Sistem Komputer</h3>
             <ul style="font-size: 12px; text-align:left;padding-left: 20px;">
-                <li>Konsep <i>Machine Learning</i></li>
+                <li>Pengenalan <i>Machine Learning</i></li>
+                <li>Proses Perbaikan Kesalahan dalam <i>Machine Learning</i></li>
                 <li>Jenis <i>Machine Learning</i></li>
-                <li>Pohon Keputusan: Cara Komputer Menebak Jawaban</li>
+                <li>Model Pohon Keputusan dalam <i>Machine Learning</i></li>
             </ul>
         </div>
 
         <div class="feature-card-materi">
-            <h3 class="feature-title"><i>Computational Thinking:</i> Berpikir Ala Komputer</h3>
+            <h3 class="feature-title">Penerapan <i>Computational Thinking</i> dalam Pemecahan Masalah</h3>
             <ul style="font-size: 12px; text-align:left;padding-left: 20px;">
-                <li>Konsep <i>Computational Thinking</i></li>
+                <li>Pengenalan <i>Computational Thinking</i></li>
                 <li>Empat Komponen Utama <i>Computational Thinking</i></li>
+                <li>Penerapan <i>Computational Thinking</i> dalam Pemecahan Masalah</li>
             </ul>
         </div>
     </div>

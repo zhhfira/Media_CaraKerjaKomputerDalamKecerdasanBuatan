@@ -20,20 +20,25 @@ class AuthController extends Controller
     {
         $request->validate([
         'username' => ['required', 'string', 'max:100'],
+        'nisn'     => ['required', 'string', 'max:20', 'unique:users,nisn'],
         'email'    => ['required', 'email', 'unique:users,email'],
         'kelas' => ['required', 'string', 'max:20'],
         'password' => ['required', 'min:8', 'regex:/[0-9]/', 'confirmed'],
 
     ], [
         'password.min'   => 'Password minimal 8 karakter.',
+        'nisn.unique'   => 'NISN sudah terdaftar.',
     
     ]);
         $data = new User();
         $data->username = $request->username;
+        $data->nisn     = $request->nisn;
         $data->email = $request->email;
         $data->kelas = $request->kelas;
         $data->password = bcrypt($request->password);
         $data->usertype = 'user'; 
+        $avatars = ['avatar1.jpg', 'avatar2.jpg', 'avatar3.jpg', 'avatar4.jpg', 'avatar5.jpg', 'avatar6.jpg']; // ← tambah
+        $data->avatar = $avatars[array_rand($avatars)]; 
         $data->save();
 
         return redirect()->route('login.lihat');

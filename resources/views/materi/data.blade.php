@@ -1,7 +1,7 @@
 @extends('layouts.siswa')
 
 @section('title', 'Data')
-@section('topbar', 'Data: Bahan Bakar Utama Kecerdasan Buatan')
+@section('topbar', 'Peran Data dalam Sistem Komputer')
 
 @push('styles')
 <style>
@@ -113,6 +113,18 @@
   }
 
 }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
@@ -122,25 +134,46 @@
     <section class="objective-box">
         <div class="objective-title">TUJUAN PEMBELAJARAN</div>
         <ul class="objective-list">
-            <li>Mengenal konsep data dan perannya sebagai dasar dalam kecerdasan buatan (AI).</li>
-            <li>Menjelaskan pentingnya data berkualitas dalam menghasilkan keputusan kecerdasan buatan yang akurat.</li>
-            <li>Memahami peran dataset dan proses labeling dalam melatih sistem kecerdasan buatan.</li>
-        </ul>
+            <li>Menjelaskan konsep data dan jenis-jenis data dalam konteks kecerdasan buatan.</li>
+            <li>Menganalisis peran data sebagai dasar pengambilan keputusan pada sistem kecerdasan buatan.</li>
+            <li>Menganalisis pengaruh kualitas dan kelengkapan data terhadap hasil pembelajaran mesin (prinsip <i>Garbage In, Garbage Out</i>).</li>
+            <li>Mengevaluasi dampak bias dalam data terhadap hasil keputusan kecerdasan buatan.</li>
+            <li>Menjelaskan dan mengaplikasikan konsep dataset dan proses labeling dalam pelatihan model kecerdasan buatan.</li></ul>
     </section>
+
+    <hr>
+        <div class="video-wrapper">
+        <video controls>
+            <source src="{{ asset('video/data.mp4') }}" type="video/mp4">
+        </video>
+    </div>
 
     <hr>
 
     <p class="section-text">
-        Pernahkah kamu memperhatikan mengapa toko online bisa menampilkan produk
-        yang mirip dengan barang yang baru saja kamu lihat? Menurutmu, apa yang
-        membuat komputer bisa tahu kesukaan seseorang? Apakah komputer bisa
-        "membaca pikiran", atau ada hal lain yang membuatnya tahu?
-        Semua kemampuan itu tidak terjadi secara kebetulan, melainkan karena adanya
-        data yang dikumpulkan dan diolah oleh komputer.
+        Pembelajaran kecerdasan buatan diawali dengan pemahaman tentang data sebagai sumber utama bagi komputer untuk belajar. Sebelum mempelajari materi lebih lanjut, buatlah dugaan mengenai peran data dalam membantu komputer belajar dan mengambil keputusan, kemudian klik tombol "Coba Duga Dulu".
     </p>
 
-    <section id="materi-isi" class="materi-isi">
-        <h3>1. Konsep Data</h3>
+    <!-- ============ COBA DUGA DULU ============ -->
+    <section class="predict-card">
+    <div class="predict-title">Coba Duga Dulu!</div>
+
+    <div class="predict-text">
+    Kemampuan komputer (AI) dalam belajar dan mengambil keputusan sangat bergantung pada data yang digunakan sebagai bahan belajar.                <br><br>
+        <b>Setuju atau Tidak Setuju?</b>
+    </div>
+
+    <div class="predict-buttons">
+        <button class="predict-btn yes" id="btnSetuju">Setuju</button>
+        <button class="predict-btn no" id="btnTidak">Tidak Setuju</button>
+    </div>
+
+    <div class="predict-feedback" id="predictFeedback"></div>
+    </section>
+
+
+    <section id="materi-isi" class="materi-isi hidden">
+        <h3 class="content-title">1. Konsep Data</h3>
         <p class="style-materi">
             Data adalah fakta mentah berupa angka, teks, gambar, atau suara yang mewakili informasi dari dunia nyata. Sebelum bisa digunakan, data perlu diolah menjadi informasi agar bermakna. Perlu dipahami bahwa data bersifat mentah, artinya informasi yang terkandung di dalamnya belum sepenuhnya bermakna atau siap digunakan. Oleh karena itu, data perlu diolah dan diverifikasi agar menjadi informasi yang akurat, relevan, dan mudah dipahami.        
         </p>
@@ -176,7 +209,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>🏙️ Foto Pemandangan</td>
+                        <td>Grafik pertumbuhan penduduk</td>
                         <td class="choices-cell">
                             <label class="choice-pill"><input type="radio" name="r1" value="teks"><span class="choice-circle"></span> Teks</label>
                             <label class="choice-pill"><input type="radio" name="r1" value="gambar"><span class="choice-circle"></span> Gambar</label>
@@ -186,7 +219,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>💬 Kalimat: <i>"Selamat pagi dunia!"</i></td>
+                        <td>Kalimat: <i>"Selamat pagi dunia!"</i></td>
                         <td class="choices-cell">
                             <label class="choice-pill"><input type="radio" name="r2" value="teks"><span class="choice-circle"></span> Teks</label>
                             <label class="choice-pill"><input type="radio" name="r2" value="gambar"><span class="choice-circle"></span> Gambar</label>
@@ -196,7 +229,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>🔢 Deretan angka: 28°C, 30°C, 32°C, 35°C</td>
+                        <td>Deretan angka: 28°C, 30°C, 32°C, 35°C</td>
                         <td class="choices-cell">
                             <label class="choice-pill"><input type="radio" name="r3" value="teks"><span class="choice-circle"></span> Teks</label>
                             <label class="choice-pill"><input type="radio" name="r3" value="gambar"><span class="choice-circle"></span> Gambar</label>
@@ -206,7 +239,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>🔊 Cuplikan bunyi hujan</td>
+                        <td>Cuplikan bunyi hujan</td>
                         <td class="choices-cell">
                             <label class="choice-pill"><input type="radio" name="r4" value="teks"><span class="choice-circle"></span> Teks</label>
                             <label class="choice-pill"><input type="radio" name="r4" value="gambar"><span class="choice-circle"></span> Gambar</label>
@@ -247,7 +280,76 @@
 
 @push('scripts')
 <script>
+/* =============================================
+   AUDIO FEEDBACK 
+============================================= */
+function playCorrect(){
+    new Audio("{{ asset('audio/benar.mp3') }}").play().catch(() => {});
+}
 
+function playWrong(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+
+function playIncomplete(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+</script>
+<script>
+  const btnSetuju = document.getElementById("btnSetuju");
+  const btnTidak  = document.getElementById("btnTidak");
+  const fbPred    = document.getElementById("predictFeedback");
+  const materi    = document.getElementById("materi-isi");
+
+  function tampilkanMateri(){
+    if (!materi) return;
+    materi.classList.remove("hidden");
+  }
+
+  btnSetuju?.addEventListener("click", () => {
+    fbPred.classList.add("show");
+    fbPred.innerHTML = `
+      ✅ <b>Setuju!</b><br>
+      AI belajar dari data untuk mengenali pola dan membuat keputusan. Yuk lihat penjelasannya lebih lanjut.
+    `;
+    tampilkanMateri();
+  });
+
+  btnTidak?.addEventListener("click", () => {
+    fbPred.classList.add("show");
+    fbPred.innerHTML = `
+      ❌ <b>Tidak Setuju.</b><br>
+      Dalam AI, komputer tidak bisa mengambil keputusan tanpa data. Yuk lihat penjelasannya pada materi kali ini.
+    `;
+    tampilkanMateri();
+  });
+</script>
+
+<script>
+const MATERI_KEY = "data.konsep"; 
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
+<script>
 // Modal
 const modalOverlay = document.getElementById("modal-overlay");
 const modalIcon    = document.getElementById("modal-icon");
@@ -286,6 +388,7 @@ document.getElementById("btn-cek-data")?.addEventListener("click", function(){
 
     for(const id of rows){
         if(!document.querySelector(`input[name="${id}"]:checked`)){
+            playIncomplete();
             openModal("error","Belum lengkap","Masih ada contoh data yang belum kamu pilih.");
             return;
         }
@@ -298,14 +401,19 @@ document.getElementById("btn-cek-data")?.addEventListener("click", function(){
         if(!fb) return;
         if(sel.value === kunciJenisData[id]){
             benar++;
-            fb.innerHTML = "✅ " + penjelasanBenar[id];
+            fb.innerHTML = "" + penjelasanBenar[id];
             fb.classList.add("correct");
         } else {
-            fb.innerHTML = "❌ Kurang tepat. Coba pikirkan lagi jenis data yang paling sesuai.";
+            fb.innerHTML = "Kurang tepat. Coba pikirkan lagi jenis data yang paling sesuai.";
             fb.classList.add("wrong");
         }
     });
-
+    if(benar === rows.length){
+        playCorrect();
+    } else {
+        playWrong();
+    }
+    
     openModal(
         benar === rows.length ? "success" : "error",
         benar === rows.length ? "Benar" : "Belum tepat",

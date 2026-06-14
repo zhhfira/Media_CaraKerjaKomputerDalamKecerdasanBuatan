@@ -2,7 +2,7 @@
 
 @section('title', 'Data: Dataset dan Labeling')
 
-@section('topbar', 'Data: Bahan Bakar Utama Kecerdasan Buatan')
+@section('topbar', 'Peran Data dalam Sistem Komputer')
 
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Alata&family=Itim&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -297,25 +297,36 @@ button:disabled{
   }
 
 }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
-    <h3>3. Dataset dan Labeling</h3>
+    <h3 class="content-title">4. Dataset dan Labeling</h3>
     <p class="style-materi">
         Untuk melatih kecerdasan buatan, data yang digunakan harus diorganisir dan diberi petunjuk agar dapat dipahami oleh mesin.
         Proses ini melibatkan dua hal penting, yaitu dataset dan labeling.
     </p>
     <p class="style-materi">
-        <b>Dataset</b> adalah kumpulan data yang telah dikumpulkan dari berbagai sumber dan siap digunakan untuk pelatihan kecerdasan buatan. Bayangkan kamu
-        ingin mengajarkan komputer untuk mengenali gambar kucing dan anjing. Maka kamu perlu menyiapkan banyak gambar kucing dan anjing — itulah yang disebut dataset.
-    </p>
-    <p class="style-materi">
-        Sementara itu, <b>labeling</b> adalah proses memberi nama atau kategori pada data agar model kecerdasan buatan dapat memahami konteksnya. Misalnya, sebuah foto diberi
-        label "anjing" agar kecerdasan buatan mengetahui bahwa gambar tersebut menampilkan seekor anjing. Dalam konteks machine learning, pelabelan data dilakukan untuk memberikan makna pada data mentah, sehingga model dapat belajar mengenali pola dan membuat prediksi yang lebih akurat.
-    </p>
+        <b>Dataset</b> adalah kumpulan data yang telah dikumpulkan dari berbagai sumber dan siap digunakan untuk pelatihan kecerdasan buatan. Misalnya, untuk melatih komputer mengenali berbagai jenis ikan sungai khas Kalimantan, diperlukan banyak gambar ikan seperti haruan, patin, dan papuyu. Kumpulan gambar tersebut disebut sebagai dataset.</p>
+        <p class="style-materi">
+        Sementara itu, <b>labeling</b> adalah proses memberi nama atau kategori pada data agar model kecerdasan buatan dapat memahami konteksnya. Sebagai contoh, sebuah gambar diberi label “Haruan” atau “Patin” sehingga kecerdasan buatan dapat mempelajari ciri-ciri dari setiap jenis ikan. Dalam machine learning, proses pelabelan data sangat penting karena membantu model mengenali pola dan menghasilkan prediksi yang lebih akurat.</p>
 
+    <p class="style-materi">
+        Pada aktivitas di bawah ini, simulasi pengenalan gambar dilakukan menggunakan teknologi Teachable Machine yang memungkinkan model kecerdasan buatan dilatih secara sederhana menggunakan gambar yang telah diberi label sebelumnya. Pada aktivitas di bawah, simulasi pengenalan gambar dilakukan menggunakan teknologi Teachable Machine. Dataset yang digunakan terdiri atas tiga jenis sayuran yang umum dijumpai dalam kuliner masyarakat Kalimantan, yaitu kaladi (talas), kelakai (lemidi), dan pucuk gumbili (daun singkong).
+    </p>
     <section class="activity-frame">
         <div id="insightButton" class="insight-btn">
             💡
@@ -345,19 +356,19 @@ button:disabled{
                         <!-- PAGE 2 -->
                         <div class="page">
                             <h3>🧠 Bagaimana Cara Kerjanya?</h3>
-                            <p style="font-size: 12px">1. Mengumpulkan gambar</p>
-                            <p style="font-size: 12px">2. Memberi label pada gambar</p>
-                            <p style="font-size: 12px">3. Model belajar mengenali pola</p>
-                            <p style="font-size: 12px">4. Menguji gambar baru untuk diprediksi</p>
+                            <p style="font-size: 12px">1. Komputer mengumpulkan berbagai gambar yang akan digunakan sebagai data latih untuk mempelajari suatu objek.</p>
+                            <p style="font-size: 12px">2. Setiap gambar diberi label sesuai kategorinya agar komputer dapat memahami jenis objek yang dipelajari.</p>
+                            <p style="font-size: 12px">3. Model kecerdasan buatan mempelajari pola dan ciri-ciri dari data yang telah diberi label sebelumnya. </p>
+                            <p style="font-size: 12px">4. Komputer membandingkan gambar baru dengan pola yang telah dipelajari untuk menghasilkan prediksi.</p>
                         </div>
 
                         <!-- PAGE 3 -->
                         <div class="page">
                             <h3>🤖 Contoh Penggunaan</h3>
-                            <p style="font-size: 12px">- Memprediksi gambar berdasarkan kemiripan</p>
-                            <p style="font-size: 12px">- Membedakan sampah organik dan anorganik</p>
-                            <p style="font-size: 12px">- Mengenali ekspresi wajah</p>
-                            <p style="font-size: 12px">- Mendeteksi gerakan tangan</p>
+                            <p style="font-size: 12px">- Sistem dapat mengenali objek dengan membandingkan pola gambar yang mirip. </p>
+                            <p style="font-size: 12px">- Sistem dapat mengelompokkan jenis sampah berdasarkan bentuk dan ciri visualnya. </p>
+                            <p style="font-size: 12px">- Sistem dapat mendeteksi ekspresi wajah, seperti senang, sedih, atau marah. </p>
+                            <p style="font-size: 12px">- Sistem dapat mengenali gerakan tangan tertentu melalui kamera. </p>
                             <p style="font-size: 12px">Pada simulasi ini, model sudah dilatih sebelumnya.</p>
                         </div>
 
@@ -377,6 +388,7 @@ button:disabled{
         </div>
 
         <div class="card">
+            <h3>Aktivitas Interaktif 📱</h3>
             <h3>Simulasi Kecerdasan Buatan: Mengenali Gambar</h3>
             <p>
                 Pada aktivitas ini, kamu akan menggunakan sebuah model kecerdasan buatan yang telah dilatih sebelumnya menggunakan dataset gambar yang sudah diberi label. Dataset tersebut membantu komputer mempelajari pola dan membedakan satu objek dengan objek lainnya. Ketika sebuah gambar ditampilkan, komputer tidak menebak secara acak, melainkan membandingkan gambar tersebut dengan data berlabel yang pernah dipelajarinya.
@@ -417,22 +429,22 @@ button:disabled{
         </div>
     </section>
 
-    <p class="style-materi">Dari aktivitas tadi, kamu telah memahami bahwa proses labeling memegang peranan sangat penting dalam pembelajaran mesin karena label berfungsi sebagai petunjuk bagi komputer untuk belajar mengenali pola. Komputer hanya dapat mengenali gambar karena sebelumnya dilatih menggunakan dataset yang sudah diberi label, sehingga tanpa dataset yang cukup dan label yang jelas, kecerdasan buatan tidak akan mampu membedakan satu objek dengan objek lainnya. Meskipun sebuah prediksi kecerdasan buatan terkadang terlihat sangat tinggi, kecerdasan buatan sebenarnya tidak pernah benar-benar "pasti" atau "yakin sepenuhnya", karena cara kerjanya didasarkan pada perhitungan peluang (probabilitas), bukan pemahaman seperti manusia.</p>
+    <p class="style-materi">Dari aktivitas tersebut, dapat dipahami bahwa proses labeling memegang peranan sangat penting dalam pembelajaran mesin karena label berfungsi sebagai petunjuk bagi komputer untuk belajar mengenali pola. Komputer dapat mengenali gambar karena sebelumnya dilatih menggunakan dataset yang telah diberi label. Tanpa dataset yang cukup dan label yang jelas, kecerdasan buatan tidak akan mampu membedakan satu objek dengan objek lainnya. Meskipun sebuah prediksi kecerdasan buatan terkadang terlihat sangat tinggi, kecerdasan buatan sebenarnya tidak pernah benar-benar "pasti" atau "yakin sepenuhnya", karena cara kerjanya didasarkan pada perhitungan peluang (probabilitas), bukan pemahaman seperti manusia.</p>
 
     <div class="case-title">
-        Contoh Kasus: <b>"Komputer Jadi Detektif Wajah"</b>
+        Contoh Kasus: <b>"Cara Kerja Komputer dalam Mengenali Wajah"</b>
     </div>
-    <p style="font-size:13px; line-height:1.9;"><b>Ilustrasi:</b> Pernah pakai HP yang bisa terbuka hanya dengan melihat wajahmu? Sekilas terlihat canggih, seolah-olah HP "mengenal" kamu. Tapi sebenarnya, HP tidak benar-benar tahu siapa kamu—ia hanya <b>belajar dari data.</b></p>
-
+    
+    <p style="font-size:13px; line-height:1.9;"><b>Ilustrasi:</b> Pernah menggunakan ponsel yang dapat terbuka hanya dengan mengenali wajahmu? Sekilas teknologi ini tampak canggih, seolah-olah ponsel benar-benar mengenal pemiliknya. Padahal, ponsel tidak memahami siapa kamu, melainkan mengenali pola dari data wajah yang telah dipelajarinya.</p>
     <figure class="img-figure">
         <img src="{{ asset('img/ilustrasi1.png') }}" alt="Gambar 5 Ilustrasi Komputer Mendeteksi Wajah">
-        <figcaption><i>Gambar 5 Ilustrasi Komputer Mendeteksi Wajah</i></figcaption>
+        <figcaption><i>Gambar 7 Ilustrasi Komputer Mendeteksi Wajah</i></figcaption>
     </figure>
 
     <p style="font-size:13px; line-height:1.9;"><b>Penjelasan:</b> Agar HP bisa mengenali wajahmu, dibutuhkan dataset berupa kumpulan foto wajah dari berbagai kondisi. Setiap foto diberi label (penanda) seperti “pemilik HP” agar komputer memahami maknanya. Dari data ini, komputer mempelajari pola wajah dan menggunakannya untuk mencocokkan saat kamu membuka HP. Jika cocok, HP terbuka; jika tidak, tetap terkunci. Namun, kesalahan pada data atau label bisa membuat komputer salah mengenali wajah yang pada akhir berakibat:</p>
     <ul>
-        <li>Pemilik HP tidak dikenali</li>
-        <li>Orang lain malah bisa membuka HP</li>
+        <li>Pemilik telepon genggam tidak dapat dikenali oleh sistem. </li>
+        <li>Orang lain justru dapat membuka telepon genggam meskipun bukan pemilik sebenarnya.</li>
     </ul>
 </div>
 
@@ -476,13 +488,35 @@ button:disabled{
     });
   }
 </script>
+<script>
+const MATERI_KEY = "data.dataset";
 
-<!-- LIBRARY TEACHABLE MACHINE -->
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script>
-  const MODEL_URL = "https://teachablemachine.withgoogle.com/models/zxlahJoI8/";
+  const MODEL_URL = "https://teachablemachine.withgoogle.com/models/9w6ZHejKZ/";
   let model = null;
   let imageReady = false;
 
@@ -533,7 +567,7 @@ button:disabled{
 
     const predictions = await model.predict(previewEl);
 
-    let html = "<b>Hasil Prediksi AI:</b><br>";
+    let html = "<b>Hasil Prediksi :</b><br>";
     predictions.forEach(p => {
       html += `${p.className}: ${Math.round(p.probability * 100)}%<br>`;
     });

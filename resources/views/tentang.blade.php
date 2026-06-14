@@ -286,7 +286,7 @@
 
     <div class="nav-buttons" id="navButtons">
         <a href="{{ route('landing') }}" class="btn btn-simple">Beranda</a>
-        <a href="" class="btn btn-simple">Petunjuk Pengerjaan</a>
+        <a href="{{ route('petunjuk') }}" class="btn btn-simple">Petunjuk Penggunaan</a>
         <a href="{{ route('tentang') }}" class="btn btn-simple">Tentang</a>
         <a href="{{ route('login.lihat') }}" class="btn btn-primary">Masuk</a>
         <a href="{{ route('register.lihat') }}" class="btn btn-outline">Daftar</a>
@@ -302,8 +302,7 @@
       </p>
 
       <div class="judul">
-        Pengembangan Media Pembelajaran Interaktif Berbasis Web
-        pada Materi Bagaimana Komputer Berpikir
+        Pengembangan Media Pembelajaran Interaktif Berbasis Web Materi Cara Kerja Sistem Komputer dalam Kecerdasan Buatan dengan Pendekatan Gamifikasi
       </div>
     </div>
 
@@ -349,13 +348,26 @@
               nuralifyazhafiraputri@gmail.com
             </a>
           </td>
-        </tr>
+        <tr>     
+          <td>No.Telp</td>
+          <td>:</td>
+          <td>
+              085849475546
+          </td>
+       </tr>
       </table>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
       <h3>Daftar Pustaka dan Atribusi</h3>
+      <p>Angraini, L. M., Sohibun, S., & Arcat, A. (2022). <i>Computational Thinking Berbasis Multimedia Interaktif</i>.</p>
+      <p>Barakbah, A. R., Karlita, T., & Ahsan, A. S. (2013). <i>Logika dan algoritma</i>. Program Studi Teknik Informatika, Departemen Teknik Informatika dan Komputer, Politeknik Elektronika Negeri Surabaya.</p>
+      <p>Bintoro, P., Ratnasari, R., Wihardjo, E., Putri, I. P., & Asari, A. (2024). <i>Pengantar machine learning</i>.</p>
+      <p>Elwirehardja, G. N., Suparyanto, T., & Pardamean, B. (2023). <i>Pengenalan Konsep Machine Learning Untuk Pemula</i>. Publisher: Instiper Press. ISBN: 978-623-5979-10-6.</p>
+      <p>Jamaluddin, M. (2021). <i>Algoritma dan Pemrograman Komputer dengan Python</i>.</p>
+      <p>Santoso, J. T. (2023). <i>Kecerdasan Buatan (Artificial Intelligence)</i>. Penerbit Yayasan Prima Agus Teknik, 1–227.</p>
+      <p>Wing, J. (2010). <i>Computational Thinking: What and Why?</i> Communications of the ACM, CACM, 49.</p>
       <p>Ilustrasi pada media pembelajaran diadaptasi dari storyset.com/work.</p>
     </div>
   </div>

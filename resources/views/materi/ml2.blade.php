@@ -2,7 +2,7 @@
 
 @section('title', 'Machine Learning: Jenis Machine Learning')
 
-@section('topbar', 'Machine Learning: Komputer yang Belajar')
+@section('topbar', 'Proses Pembelajaran Mesin dalam Sistem Komputer')
 
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Alata&family=Itim&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -197,12 +197,24 @@
 }
 
 .modal-btn:hover{ background: #185abc; }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
-    <h3>2. Jenis <i>Machine Learning</i></h3>
+    <h3 class="content-title">3. Jenis <i>Machine Learning</i></h3>
 
     <p class="style-materi">
         Secara umum, terdapat dua jenis utama algoritma dalam <i>machine learning</i>, yaitu <i>Supervised Learning</i> dan <i>Unsupervised Learning</i>.
@@ -220,12 +232,12 @@
             </p>
 
             <figure class="img-figure">
-                <img src="{{ asset('img/supervised.png') }}" alt="Gambar 9 Alur Supervised Learning">
-                <figcaption><i>Gambar 9 Alur Supervised Learning</i></figcaption>
+                <img src="{{ asset('img/supervised.png') }}" alt="Gambar 11 Alur Supervised Learning">
+                <figcaption><i>Gambar 11. Alur Supervised Learning</i></figcaption>
             </figure>
 
             <p class="style-materi">
-                Dapat dilihat pada gambar 9 proses <i>supervised learning</i> dapat dipahami secara sederhana sebagai berikut. Pertama, model menerima data mentah
+                Dapat dilihat pada gambar 11 proses <i>supervised learning</i> dapat dipahami secara sederhana sebagai berikut. Pertama, model menerima data mentah
                 (input raw data) berupa gambar-gambar hewan yang sudah dilengkapi dengan label, seperti sapi, gajah, dan unta. Data berlabel ini berfungsi sebagai
                 contoh bagi komputer untuk belajar mengenali ciri-ciri setiap hewan. Selanjutnya, data tersebut diproses menggunakan algoritma, yaitu aturan atau langkah logis
                 yang membantu komputer menemukan pola dari data yang ada.
@@ -234,7 +246,7 @@
             <p class="style-materi">
                 Setelah melalui tahap pemrosesan dan pembelajaran, model akan menghasilkan output, yaitu prediksi label untuk data baru. Misalnya, ketika diberikan gambar hewan
                 yang belum pernah dilihat sebelumnya, model dapat menentukan apakah gambar tersebut termasuk gajah, unta, atau sapi, berdasarkan kemiripan pola dengan data latihan.
-                Dengan cara inilah <i>supervised learning</i> bekerja: belajar dari contoh yang sudah diberi label, lalu menggunakan hasil pembelajaran tersebut untuk membuat keputusan pada data baru.
+                Dengan cara inilah <i>supervised learning</i> bekerja yaitu belajar dari contoh yang sudah diberi label, lalu menggunakan hasil pembelajaran tersebut untuk membuat keputusan pada data baru.
             </p>
         </li>
 
@@ -246,12 +258,12 @@
             </p>
 
             <figure class="img-figure">
-                <img src="{{ asset('img/unsupervised.png') }}" alt="Gambar 10 Alur Unsupervised Learning">
-                <figcaption><i>Gambar 10 Alur Unsupervised Learning</i></figcaption>
+                <img src="{{ asset('img/unsupervised.png') }}" alt="Gambar 12 Alur Unsupervised Learning">
+                <figcaption><i>Gambar 12. Alur Unsupervised Learning</i></figcaption>
             </figure>
 
             <p class="style-materi">
-                Dapat dilihat pada Gambar 10 proses <i>unsupervised learning</i> dimulai dari input raw data berupa gambar-gambar hewan tanpa label. Komputer tidak diberi tahu mana gajah, unta,
+                Dapat dilihat pada Gambar 12 proses <i>unsupervised learning</i> dimulai dari input raw data berupa gambar-gambar hewan tanpa label. Komputer tidak diberi tahu mana gajah, unta,
                 atau sapi. Pada tahap <i>interpretation</i>, model mencoba memahami karakteristik data, seperti bentuk, ukuran, atau kemiripan visual antar hewan. Selanjutnya, melalui algoritma dan proses
                 pengolahan <i>(processing)</i>, model melakukan pelatihan <i>(model training)</i> untuk mengelompokkan data berdasarkan kemiripan ciri yang ditemukan.
             </p>
@@ -282,7 +294,7 @@
 
         <p>
             <b>Petunjuk:</b><br/>
-            Pasangkan setiap kartu kasus di bawah ini ke kolom <i>Supervised Learning</i> dan <i>Unsupervised Learning</i> sesuai dengan karakteristiknya. Bacalah setiap kasus dengan teliti dan tentukan apakah
+            Pasangkan setiap kartu kasus di bawah ini ke kolom (<i>drag and drop</i>) <i>Supervised Learning</i> dan <i>Unsupervised Learning</i> sesuai dengan karakteristiknya. Bacalah setiap kasus dengan teliti dan tentukan apakah
             contoh tersebut memerlukan label atau tidak.
         </p>
 
@@ -334,9 +346,9 @@
         <div id="hasil-ml" class="hasil" aria-live="polite"></div>
 
         <div id="feedback-penutup" class="feedback-penutup">
-            Melalui aktivitas ini, kamu telah melihat bahwa cara sebuah model Machine Learning belajar sangat bergantung pada jenis data yang diterimanya. Ketika data sudah memiliki label —
-            seperti nama tanaman, jenis suara, atau kategori hasil belajar — maka komputer dapat belajar dengan cara meniru contoh tersebut. Inilah yang disebut Supervised Learning. Sebaliknya,
-            jika data tidak memiliki label, komputer harus mencari pola dan kemiripannya sendiri. Proses ini dikenal sebagai Unsupervised Learning.
+            Melalui aktivitas ini, kamu telah melihat bahwa cara sebuah model <i>Machine Learning</i> belajar sangat bergantung pada jenis data yang diterimanya. Ketika data sudah memiliki label —
+            seperti nama tanaman, jenis suara, atau kategori hasil belajar — maka komputer dapat belajar dengan cara meniru contoh tersebut. Inilah yang disebut <i>Supervised Learning</i>. Sebaliknya,
+            jika data tidak memiliki label, komputer harus mencari pola dan kemiripannya sendiri. Proses ini dikenal sebagai <i>Unsupervised Learning</i>.
         </div>
     </section>
 </div>
@@ -360,8 +372,47 @@
     </div>
 </div>
 @endsection
-
 @push('scripts')
+<script>
+/* =============================================
+   AUDIO FEEDBACK 
+============================================= */
+function playCorrect(){
+    new Audio("{{ asset('audio/benar.mp3') }}").play().catch(() => {});
+}
+
+function playWrong(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+
+function playIncomplete(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+</script>
+<script>
+const MATERI_KEY = "ml.jenis"; 
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
 <script>
 function showModal(type, title, htmlText){
     const overlay = document.getElementById("modal-overlay");
@@ -504,6 +555,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (placedCount !== TOTAL_ITEMS) {
             const sisa = TOTAL_ITEMS - placedCount;
+            playIncomplete();
 
             showModal(
                 "error",
@@ -530,6 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (salah === 0) {
+            playCorrect();
             showModal(
                 "success",
                 "Benar",
@@ -540,6 +593,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (feedbackPenutup) feedbackPenutup.style.display = "block";
         } else {
+            playWrong();
             showModal(
                 "error",
                 "Belum Tepat",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\QuizAttempt;
+use App\Models\MateriProgress;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -18,21 +19,30 @@ class SiswaController extends Controller
         $totalQuiz = 4;
         $totalEvaluasi = 1;
 
-    // SUDAH DIKERJAKAN (Quiz 1-4)
-    $quizDikerjakan = QuizAttempt::where('user_id', $user->id)
-        ->whereIn('quiz_id', [1,2,3,4])
+        // SUDAH DIKERJAKAN (Quiz 1-4)
+        $quizDikerjakan = QuizAttempt::where('user_id', $user->id)
+            ->whereIn('quiz_id', [1,2,3,4])
+            ->distinct('quiz_id')
+            ->count('quiz_id');
+
+        // Evaluasi (Quiz ID 5)
+        $evaluasiDikerjakan = QuizAttempt::where('user_id', $user->id)
+            ->where('quiz_id', 5)
+            ->exists() ? 1 : 0;
+
+        // Progress tetap dari total 5
+        $totalSemua = 19;
+        $materiDibaca = MateriProgress::where('user_id', $user->id)
+        ->where('is_read', true)
+        ->count();
+
+    $kuisDikerjakan = QuizAttempt::where('user_id', $user->id)
+        ->whereIn('quiz_id', [1,2,3,4,5])
         ->distinct('quiz_id')
         ->count('quiz_id');
 
-    // Evaluasi (Quiz ID 5)
-    $evaluasiDikerjakan = QuizAttempt::where('user_id', $user->id)
-        ->where('quiz_id', 5)
-        ->exists() ? 1 : 0;
-
-    // Progress tetap dari total 5
-    $totalSemua = 5;
-    $completed = $quizDikerjakan + $evaluasiDikerjakan;
-    $progress = ($completed / $totalSemua) * 100;
+    $completed = $materiDibaca + $kuisDikerjakan;
+    $progress = round(($completed / $totalSemua) * 100);
 
         // Rata-rata nilai tiap kuis
         $rataQuiz1 = QuizAttempt::where('user_id', $user->id)
@@ -56,7 +66,7 @@ class SiswaController extends Controller
                             ->max('score');
 
         return view('siswa.dashboard', compact(
-            'totalQuiz',
+        'totalQuiz',
         'totalEvaluasi',
         'quizDikerjakan',
         'evaluasiDikerjakan',

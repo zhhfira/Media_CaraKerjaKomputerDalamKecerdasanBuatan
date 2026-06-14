@@ -51,7 +51,6 @@ label{ display:block; font-weight:800; margin-bottom:6px; font-size:14px; }
                 <input class="input" type="text" name="title"
                        value="{{ old('title', $quiz->title) }}"
                        placeholder="Contoh: Kuis Bab 1 - Data" required>
-                <div class="help">Judul ini tampil di halaman siswa.</div>
             </div>
 
             <div class="form-row">
@@ -63,21 +62,11 @@ label{ display:block; font-weight:800; margin-bottom:6px; font-size:14px; }
                     <div class="help">Contoh: 30</div>
                 </div>
                 <div class="field">
-                    <label>KKM (persen)</label>
+                    <label>KKM</label>
                     <input class="input" type="number" name="kkm"
                            value="{{ old('kkm', $quiz->kkm) }}"
                            min="0" max="100" required>
                     <div class="help">Contoh: 70</div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="field">
-                    <label>Poin per Soal</label>
-                    <input class="input" type="number" name="points_per_question"
-                           value="{{ old('points_per_question', $quiz->points_per_question) }}"
-                           min="1" required>
-                    <div class="help">Contoh: 10</div>
                 </div>
             </div>
 

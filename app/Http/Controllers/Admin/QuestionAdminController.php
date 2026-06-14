@@ -70,7 +70,7 @@ public function edit(Quiz $quiz, Question $question)
         $q = $quiz->questions()->create([
             'question_text'  => $data['question_text'],
             'order_no'       => $data['order_no'] ?? ($quiz->questions()->count() + 1),
-            'question_image' => $imagePath, // ← TAMBAHKAN
+            'question_image' => $imagePath, 
         ]);
 
         foreach ($data['options'] as $opt) {

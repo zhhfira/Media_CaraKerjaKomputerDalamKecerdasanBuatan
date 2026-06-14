@@ -1,8 +1,8 @@
 @extends('layouts.siswa')
 
-@section('title', 'Berpikir Komputasional: Empat Komponen Computational Thinking')
+@section('title', 'Berpikir Komputasional: Empat Komponen Utama Computational Thinking')
 
-@section('topbar', 'Computational Thinking: Berpikir Ala Komputer')
+@section('topbar', 'Penerapan Computational Thinking dalam Pemecahan Masalah')
 
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Alata&family=Itim&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   margin: 16px 0 20px 0;
   background: #fff;
   font-family: 'Poppins', Arial, sans-serif;
-  box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
 .activity-intro .label{
@@ -447,13 +447,25 @@ td:last-child{
   }
 
 }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
 
-    <h3>2. Empat Komponen Utama <i>Computational Thinking</i></h3>
+    <h3 class="content-title">2. Empat Komponen Utama <i>Computational Thinking</i></h3>
 
     <p class="style-materi">
         Menurut Angraini et al. (2022), terdapat empat komponen utama dalam <i>computational thinking,</i> yaitu dekomposisi, pengenalan pola, abstraksi, dan perancangan algoritma. Keempat komponen ini saling berkaitan dalam membentuk cara berpikir sistematis yang menjadi dasar penyelesaian masalah secara komputasional.
@@ -469,30 +481,27 @@ td:last-child{
 
         <div class="activity-intro">
             <div class="label">Aktivitas Interaktif:</div>
-            <div class="title">"Bagaimana Komputer Mengenali Gambar Hewan?"</div>
+            <div class="title">"Bagaimana Komputer Mengenali Jenis Ikan Sungai di Kalimantan?"</div>
             <p>
-                Kamu diminta untuk membuat program yang bisa membedakan foto kucing dan
-                anjing. Bagaimana kamu dapat membuatnya bekerja dengan cepat dan akurat?
-                Mari kita selesaikan dengan <i>Computational Thinking</i> (CT).
+                Sebuah program komputer dirancang untuk membedakan berbagai jenis ikan sungai khas Kalimantan, seperti haruan, patin, dan papuyu. Agar program dapat bekerja dengan cepat dan akurat, komputer perlu mempelajari ciri-ciri dari setiap jenis ikan, seperti bentuk tubuh, warna, ukuran, dan pola sisiknya. Bagaimana cara komputer mengenali perbedaan tersebut? Mari mempelajarinya menggunakan pendekatan Computational Thinking (CT).
             </p>
         </div>
 
         <div class="box-table">
             <div class="box-header">Komponen 1 – Dekomposisi</div>
             <div class="box-body">
-                <p>Kamu diberi tugas untuk membantu komputer belajar mengenali gambar kucing dan anjing.</p>
-                <p>Agar berhasil, kamu harus memecah tugas besar ini menjadi langkah-langkah yang lebih kecil.</p>
+                <p>Sebuah sistem komputer dirancang untuk mengenali berbagai jenis ikan sungai khas Kalimantan dari gambar yang diberikan. Agar proses tersebut dapat berjalan dengan baik, permasalahan perlu dipecah menjadi langkah-langkah yang lebih kecil dan terstruktur sehingga komputer dapat mempelajari ciri khas dari setiap jenis ikan.</p>
                 <p class="box-subtitle"><b>Instruksi Pengerjaan</b></p>
                 <p>Pasangkan langkah dan kegiatan berikut ini dengan sesuai agar komputer bisa belajar mengenali gambar dengan benar.</p>
             </div>
             <section class="dd-wrap">
                 <!-- BANK (kartu kegiatan) -->
                 <div class="dd-bank" id="bank">
-                    <div class="dd-item" draggable="true" data-id="kumpul">Mengumpulkan banyak gambar kucing dan anjing.</div>
-                    <div class="dd-item" draggable="true" data-id="folder">Menyimpan gambar ke dalam dua folder: "Kucing" dan "Anjing".</div>
-                    <div class="dd-item" draggable="true" data-id="latih">Melatih komputer agar bisa mengenali perbedaan bentuk kucing dan anjing.</div>
-                    <div class="dd-item" draggable="true" data-id="uji">Menguji hasilnya dengan gambar baru.</div>
-                    <div class="dd-item" draggable="true" data-id="perbaiki">Memperbaiki data jika komputer salah menebak.</div>
+                    <div class="dd-item" draggable="true" data-id="kumpul">Mengelompokkan gambar berdasarkan jenis ikan, seperti haruan, patin, dan papuyu.</div>
+                    <div class="dd-item" draggable="true" data-id="folder">Mengumpulkan berbagai gambar ikan sungai khas Kalimantan. </div>
+                    <div class="dd-item" draggable="true" data-id="latih">Menguji kemampuan komputer dalam mengenali jenis ikan berdasarkan gambar yang diberikan.</div>
+                    <div class="dd-item" draggable="true" data-id="uji">Memperbaiki data apabila komputer masih salah mengenali gambar ikan. </div>
+                    <div class="dd-item" draggable="true" data-id="perbaiki">Melatih komputer agar dapat mengenali perbedaan ciri setiap jenis ikan. </div>
                 </div>
 
                 <!-- TABEL -->
@@ -541,7 +550,7 @@ td:last-child{
                 <p>
                     Pada aktivitas sebelumnya, kamu telah memecah proses kerja komputer dalam mengenali gambar menjadi langkah-langkah kecil (dekomposisi).
                     Sekarang, kamu akan mempelajari bagaimana komputer mengenali pola dari data yang telah dikumpulkan.
-                    Bayangkan komputer sedang belajar mengenali hewan dari bentuk telinga dan ekornya. Beberapa gambar sudah diberi label agar komputer dapat belajar menemukan pola yang sama di antara data.
+                    Bayangkan komputer sedang belajar mengenali berbagai jenis ikan sungai dari bentuk tubuh, warna, dan pola sisiknya. Beberapa gambar telah diberi label sesuai jenis ikannya agar komputer dapat mempelajari ciri-ciri dan menemukan pola yang sama pada setiap data.
                 </p>
                 <p class="box-subtitle"><b>Instruksi Pengerjaan</b></p>
                 <p>Amati pola ciri-ciri yang ada pada tabel di atas! Kemudian tentukan label yang paling sesuai untuk nomor 4 dengan mengisi kolom label dengan jawaban yang benar.</p>
@@ -555,22 +564,22 @@ td:last-child{
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>Bulu lembut, suka mengeong, memiliki cakar kecil</td>
-                        <td>Kucing</td>
+                        <td>Tubuh panjang dan berwarna gelap</td>
+                        <td>Haruan</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Bulu tebal, suka menggonggong, ekor bergoyang saat senang</td>
-                        <td>Anjing</td>
+                        <td>Memiliki kumis dan tubuh licin</td>
+                        <td>Patin</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Bulu halus, suka mengeong, tidur di tempat hangat</td>
-                        <td>Kucing</td>
+                        <td>Sering hidup di rawa dan bentuk tubuh memanjang</td>
+                        <td>Haruan</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>Bulu tebal, menggonggong keras saat melihat orang asing</td>
+                        <td>Memiliki kumis panjang dan hidup di sungai</td>
                         <td><input type="text" id="jawaban" placeholder="Isi label"></td>
                     </tr>
                 </table>
@@ -594,17 +603,17 @@ td:last-child{
                 </p>
                 <p class="box-subtitle"><b>Instruksi Pengerjaan</b></p>
                 <p>
-                    Pilih informasi yang benar-benar diperlukan oleh komputer untuk dapat membedakan antara gambar kucing dan anjing.
+                    Pilih informasi yang benar-benar diperlukan oleh komputer untuk membedakan jenis ikan sungai khas Kalimantan.
                     Beri tanda centang (✔) pada informasi yang paling relevan dan berpengaruh terhadap hasil pengenalan pola.
                 </p>
                 <div class="abstraksi-box">
                     <p><b>Catatan:</b> Pilih lebih dari satu informasi!</p>
-                    <label><input type="checkbox" value="latar"> Warna Latar Gambar</label><br>
-                    <label><input type="checkbox" value="telinga"> Bentuk Telinga</label><br>
-                    <label><input type="checkbox" value="ekor"> Panjang Ekor</label><br>
-                    <label><input type="checkbox" value="background"> Jenis Latar Belakang (dalam ruangan / luar ruangan)</label><br>
-                    <label><input type="checkbox" value="kaki"> Jumlah Kaki</label><br>
-                    <label><input type="checkbox" value="bulu"> Warna Bulu</label><br>
+                    <label><input type="checkbox" value="latar"> Warna air sungai</label><br>
+                    <label><input type="checkbox" value="telinga"> Bentuk tubuh ikan</label><br>
+                    <label><input type="checkbox" value="ekor"> Ada atau tidaknya kumis</label><br>
+                    <label><input type="checkbox" value="background"> Lokasi gambar diambil</label><br>
+                    <label><input type="checkbox" value="kaki"> Ukuran tubuh ikan</label><br>
+                    <label><input type="checkbox" value="bulu"> Pola atau warna sisik</label><br>
                     <label><input type="checkbox" value="nama"> Nama File Gambar</label><br><br>
                     <button class="btn" type="button" id="cekAbstraksiBtn">Cek Jawaban</button>
                 </div>
@@ -621,11 +630,11 @@ td:last-child{
             <div class="box-header">Komponen 4 – Algoritma</div>
             <div class="box-body">
                 <p>
-                    Setelah menyelesaikan kegiatan pada tahap Dekomposisi, Pengenalan Pola, dan Abstraksi, sekarang kamu akan menyusun langkah-langkah sistematis yang dilakukan komputer untuk mengenali gambar hewan (kucing dan anjing).
+                    Setelah menyelesaikan kegiatan pada tahap Dekomposisi, Pengenalan Pola, dan Abstraksi, langkah berikutnya adalah menyusun urutan proses yang dilakukan komputer untuk mengenali jenis ikan sungai khas Kalimantan.
                     Algoritma harus jelas, terurut, dan dapat diikuti secara logis oleh komputer agar menghasilkan keputusan yang tepat.
                 </p>
                 <p class="box-subtitle"><b>Instruksi Pengerjaan</b></p>
-                <p>Urutkan langkah yang benar berdasarkan proses kerja kecerdasan buatan dalam mengenali gambar. Susun kembali langkah-langkah berikut agar membentuk algoritma yang runtut dan efisien.</p>
+                <p>Urutkan langkah yang benar berdasarkan proses kerja kecerdasan buatan dalam mengenali gambar. Susun kembali langkah-langkah berikut <i>(drag end drop)</i> agar membentuk algoritma yang runtut dan efisien.</p>
 
                 <div id="activity4">
                     <table class="identify-table">
@@ -639,11 +648,11 @@ td:last-child{
                             <tr>
                                 <td>
                                     <div id="bank4" class="bank">
-                                        <div class="drag-item" draggable="true" data-id="fix">Memperbaiki data jika hasil prediksi masih salah.</div>
-                                        <div class="drag-item" draggable="true" data-id="label">Memberi label pada setiap gambar sesuai jenisnya (kucing atau anjing).</div>
-                                        <div class="drag-item" draggable="true" data-id="test">Menguji model dengan gambar baru untuk melihat hasil prediksi.</div>
-                                        <div class="drag-item" draggable="true" data-id="collect">Mengumpulkan gambar kucing dan anjing untuk dijadikan data latih.</div>
-                                        <div class="drag-item" draggable="true" data-id="train">Melatih model kecerdasan buatan agar dapat mengenali pola dari data yang sudah diberi label.</div>
+                                        <div class="drag-item" draggable="true" data-id="test">Menguji model menggunakan gambar ikan baru untuk melihat hasil prediksi.</div>
+                                        <div class="drag-item" draggable="true" data-id="collect">Mengumpulkan gambar berbagai jenis ikan sungai sebagai data latih.</div>
+                                        <div class="drag-item" draggable="true" data-id="fix">Memperbaiki data apabila hasil prediksi komputer masih salah.</div>
+                                        <div class="drag-item" draggable="true" data-id="train">Melatih model kecerdasan buatan agar dapat mengenali pola dari data yang telah diberi label.</div>
+                                        <div class="drag-item" draggable="true" data-id="label">Memberi label pada setiap gambar sesuai jenis ikan, seperti haruan, patin, atau papuyu.</div>
                                     </div>
                                 </td>
                                 <td class="steps-cell">
@@ -675,8 +684,8 @@ td:last-child{
 </div>
 
 <div class="bottom-bar">
-    <a href="{{ route('quiz.show',  ['quiz' => 4]) }}" class="btn-next">
-        Uji Pemahamanmu!
+    <a href="{{ route('materi.ct3') }}" class="btn-next">
+        Materi Selanjutnya
         <i class="fa-solid fa-arrow-right"></i>
     </a>
 </div>
@@ -695,6 +704,41 @@ td:last-child{
 @endsection
 
 @push('scripts')
+<script>
+function playCorrect(){
+    new Audio("{{ asset('audio/benar.mp3') }}").play().catch(() => {});
+}
+function playWrong(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+function playIncomplete(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+</script>
+<script>
+const MATERI_KEY = "ct.empat"; 
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
 <script>
     const container = document.querySelector(".content-card");
 
@@ -769,11 +813,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!bank || !cekBtn || !resetBtn || !drops.length) return;
 
     const KEY = {
-        kumpul:   "1",
-        folder:   "2",
-        latih:    "3",
-        uji:      "4",
-        perbaiki: "5",
+        folder:   "1",
+        kumpul:   "2",
+        perbaiki: "3",
+        latih:    "4",
+        uji:      "5",
     };
 
     let dragged = null;
@@ -832,7 +876,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const placedCount = [...drops].reduce((acc, z) => acc + z.querySelectorAll(".dd-item").length, 0);
         const totalCount  = placedCount + bank.querySelectorAll(".dd-item").length;
 
-        if (placedCount !== totalCount || placedCount !== Object.keys(KEY).length) {
+        if (placedCount !== Object.keys(KEY).length) {
+            playIncomplete();
             showModal("error", "Belum Lengkap", "Masih ada kartu yang belum dipasang. Lengkapi dulu!");
             return;
         }
@@ -852,8 +897,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (salah === 0) {
+            playCorrect();
             showModal("success", "Benar", "Mantap! Urutannya sudah tepat: kumpulkan data → kelompokkan → latih → uji → perbaiki.");
         } else {
+            playWrong();
             showModal("error", "Belum Tepat", `Masih ada <b>${salah}</b> yang salah. Cek lagi urutan proses belajarnya.`);
         }
     });
@@ -884,11 +931,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const input   = document.getElementById("jawaban");
         const jawaban = (input?.value || "").trim().toLowerCase();
 
-        if (jawaban === "anjing") {
-            showModal("success", "Benar", 'Benar! Label yang tepat adalah <b>Anjing</b>.');
+        if (jawaban === "patin") {
+            playCorrect();
+            showModal("success", "Benar", 'Benar! Label yang tepat adalah <b>Patin</b>.');
         } else if (jawaban === "") {
+            playIncomplete();
             showModal("error", "Belum Diisi", "Silakan isi jawaban terlebih dahulu.");
         } else {
+            playIncomplete();
             showModal("error", "Belum Tepat", "Belum tepat. Perhatikan ciri-cirinya lagi.");
         }
     });
@@ -908,6 +958,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const jawabanBenar = ["telinga", "ekor", "kaki", "bulu"];
 
         if (checked.length === 0) {
+            playIncomplete();
             showModal("error", "Belum Ada Pilihan", "Pilih beberapa informasi yang menurutmu penting dulu!");
             return;
         }
@@ -921,13 +972,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (salah > 0) {
+            playWrong();
             showModal("error", "Belum Tepat", "Ingat, abstraksi itu memilih ciri utama dan mengabaikan detail yang tidak diperlukan.");
             return;
         }
 
         if (benar === jawabanBenar.length) {
+            playCorrect();
             showModal("success", "Tepat!", "Kamu sudah memilih semua ciri penting yang relevan untuk mengenali hewan.");
         } else {
+            playWrong();
             showModal("error", "Hampir Benar", "Kamu sudah memilih ciri yang tepat, tapi masih ada ciri penting yang belum dipilih.");
         }
     });
@@ -1014,6 +1068,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (kosong.length) {
+            playIncomplete();
             showModal("error", "Belum Lengkap", `Masih ada langkah yang kosong: <b>${kosong.join(", ")}</b>. Lengkapi dulu!`);
             return;
         }
@@ -1033,8 +1088,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (salah === 0) {
+            playCorrect();
             showModal("success", "Benar", "Benar semua! Urutan prosesnya sudah tepat: kumpulkan data → beri label → latih → uji → perbaiki.");
         } else {
+            playWrong();
             showModal("error", "Belum Tepat", `Masih ada <b>${salah}</b> langkah yang salah. Coba cek lagi urutan proses belajarnya!`);
         }
     });

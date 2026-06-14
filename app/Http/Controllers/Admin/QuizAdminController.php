@@ -24,7 +24,6 @@ class QuizAdminController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'duration_minutes' => 'required|integer|min:1|max:300',
-            'points_per_question' => 'required|integer|min:1|max:100',
             'kkm' => 'required|integer|min:0|max:100',
         ]);
 
@@ -46,7 +45,6 @@ class QuizAdminController extends Controller
         'title' => 'required|string|max:255',
         'duration_minutes' => 'required|integer|min:1',
         'kkm' => 'required|integer|min:0|max:100',
-        'points_per_question' => 'required|integer|min:1',
     ]);
 
     $quiz->update($data);

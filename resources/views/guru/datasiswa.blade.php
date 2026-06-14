@@ -115,7 +115,8 @@
                 <thead>
                 <tr style="background:rgba(0,0,0,.03);">
                     <th style="padding:12px;text-align:left;">No</th>
-                    <th style="padding:12px;text-align:left;">Username</th>
+                    <th style="padding:12px;text-align:left;">Nama Siswa</th>
+                    <th style="padding:12px;text-align:left;">NISN</th>
                     <th style="padding:12px;text-align:left;">Email</th>
                     <th style="padding:12px;text-align:left;">Kelas</th>
                 </tr>
@@ -125,6 +126,7 @@
                     <tr>
                         <td style="padding:12px;border-bottom:1px solid rgba(0,0,0,.06);">{{ $i+1 }}</td>
                         <td style="padding:12px;border-bottom:1px solid rgba(0,0,0,.06);">{{ $s->username }}</td>
+                        <td style="padding:12px;border-bottom:1px solid rgba(0,0,0,.06);">{{ $s->nisn ?? '-' }}</td>
                         <td style="padding:12px;border-bottom:1px solid rgba(0,0,0,.06);">{{ $s->email }}</td>
                         <td style="padding:12px;border-bottom:1px solid rgba(0,0,0,.06);">{{ $s->kelas }}</td>
                     </tr>
@@ -225,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         filteredRows = rows.filter(row => {
             const nameMatch  = row.children[1].textContent.toLowerCase().includes(keyword);
-            const kelasMatch = !kelas || row.children[3].textContent.trim() === kelas;
+            const kelasMatch = !kelas || row.children[4].textContent.trim() === kelas;
             return nameMatch && kelasMatch;
         });
 
@@ -256,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
         doc.setFontSize(16);
         doc.text("Data Siswa", 14, 16);
 
-        const tableColumn = ["No", "Username", "Email", "Kelas"];
+        const tableColumn = ["No", "Nama Siswa", "NISN", "Email", "Kelas"];
         const tableRows   = [];
 
         filteredRows.forEach((row, index) => {
@@ -264,7 +266,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 index + 1,
                 row.children[1].textContent,
                 row.children[2].textContent,
-                row.children[3].textContent
+                row.children[3].textContent,
+                row.children[4].textContent,
             ]);
         });
 

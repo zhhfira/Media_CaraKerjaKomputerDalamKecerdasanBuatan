@@ -56,7 +56,6 @@ th{ background:rgba(0,0,0,.03); font-weight:600; }
                     <th>Judul</th>
                     <th style="width:120px;">Durasi</th>
                     <th style="width:90px;">KKM</th>
-                    <th style="width:130px;">Poin/Soal</th>
                     <th style="width:280px;">Aksi</th>
                 </tr>
             </thead>
@@ -67,7 +66,6 @@ th{ background:rgba(0,0,0,.03); font-weight:600; }
                         <td style="font-weight:600;">{{ $quiz->title }}</td>
                         <td><span class="badge">{{ $quiz->duration_minutes }} menit</span></td>
                         <td><span class="badge">{{ $quiz->kkm }}</span></td>
-                        <td><span class="badge">{{ $quiz->points_per_question }}</span></td>
                         <td style="display:flex;gap:8px;flex-wrap:wrap;">
                             <a href="{{ route('guru.questions.index', $quiz->id) }}" class="btn-mini btn-questions">
                                 <i class="fa-solid fa-list-check"></i> Kelola Soal

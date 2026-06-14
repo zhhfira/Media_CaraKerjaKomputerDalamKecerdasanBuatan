@@ -68,7 +68,7 @@
         margin-top: 18px;
         padding: 16px 18px;
         background: #f9f9f9;
-        border-left: 5px solid #1a73e8;
+        border-left: 5px solid #0a4bb8;
         border-radius: 6px;
         font-size: 12px;
         line-height: 1.7;
@@ -143,7 +143,7 @@
 
     <p class="style1">Salah satu ciri utama kecerdasan buatan adalah kemampuannya untuk belajar dari data dan pengalaman. Inilah yang membuat rekomendasi YouTube semakin sesuai dengan minat pengguna, atau prediksi Google Maps semakin akurat dari waktu ke waktu. Namun, penting untuk dipahami bahwa proses "belajar" pada komputer sangat berbeda dengan cara manusia belajar. Komputer tidak benar-benar memahami makna, melainkan hanya menyesuaikan perhitungan berdasarkan pola data.</p><br>
 
-    <p class="style1">Perbedaan ini menjadi semakin jelas jika dibandingkan dengan kecerdasan alami. Kecerdasan manusia dan hewan merupakan hasil proses biologis yang kompleks dan berkembang melalui evolusi. Manusia mampu berpikir secara abstrak, menggunakan bahasa, berkreasi, berempati, serta mengambil keputusan berdasarkan perasaan dan pengalaman subjektif. Hewan pun menunjukkan bentuk kecerdasan alami, seperti kemampuan belajar, memecahkan masalah, berkomunikasi, dan beradaptasi dengan lingkungan. Semua kemampuan ini muncul secara alami, bukan karena diprogram.</p>
+    <p class="style1">Perbedaan ini menjadi semakin jelas jika dibandingkan dengan kecerdasan alami. Kecerdasan manusia dan hewan merupakan hasil proses biologis yang kompleks dan berkembang melalui evolusi. Manusia mampu berpikir secara abstrak, menggunakan bahasa, berkreasi, berempati, serta mengambil keputusan berdasarkan perasaan dan pengalaman subjektif. Hewan pun menunjukkan bentuk kecerdasan alami, seperti kemampuan belajar, memecahkan masalah, berkomunikasi, dan beradaptasi dengan lingkungan. Semua kemampuan ini muncul secara alami, bukan karena diprogram. Perbedaan tersebut dapat dilihat pada tabel berikut.</p>
 
     <div style="margin-top:20px;">
         <h6 style="margin-bottom:14px;font-size:13px;">Tabel 1. Perbandingan Kecerdasan Alami dan Kecerdasan Buatan</h6>
@@ -201,13 +201,13 @@
     </div>
     <br>
 
-    <p class="style1">Pada materi ini, kamu akan mempelajari bagaimana komputer dapat "berpikir" secara teknis, meskipun sebenarnya yang terjadi adalah proses komputasi. Proses tersebut melibatkan beberapa tahapan penting, yaitu <b>data</b> sebagai bahan utama, <b>algoritma</b> sebagai langkah-langkah pemrosesan, <b><i>machine learning</i></b> sebagai metode belajar dari data, serta <b><i>computational thinking</i></b> sebagai cara berpikir logis dan sistematis dalam memecahkan masalah.</p>
+    <p class="style1">Pada bab ini akan dipelajari bagaimana komputer dapat bekerja dalam kecerdasan buatan melalui proses komputasi. Proses tersebut melibatkan beberapa tahapan penting, yaitu data sebagai bahan utama, algoritma sebagai langkah-langkah pemrosesan, machine learning sebagai metode belajar dari data, serta computational thinking sebagai cara berpikir logis dan sistematis dalam memecahkan masalah. Sebelum mempelajari materi lebih lanjut, lakukan aktivitas berikut untuk memahami perbedaan antara pekerjaan yang dilakukan manusia dan proses yang dapat dilakukan oleh komputer.</p>
 
     {{-- KOTAK AKTIVITAS --}}
     <div class="activity-identify">
         <div class="activity-identify-header">
             Melalui aktivitas berikut, coba identifikasi mana yang <b>dilakukan manusia</b>
-            dan mana yang <b>dilakukan komputer</b>.
+            dan mana yang <b>dilakukan komputer</b>. Pilih jawaban yang sesuai pada setiap situasi berikut.
         </div>
         <table class="identify-table">
             <thead>
@@ -252,12 +252,12 @@
         <div id="feedback-q3" class="feedback-item"></div>
         <div id="feedback-q4" class="feedback-item"></div>
         <div id="feedback-summary" class="feedback-summary">
-            <p style="font-size:15px">Ada empat hal penting yang menjadi dasar <b>Cara Komputer "Berpikir"</b>:</p>
+            <p style="font-size:15px">sumber informasi yang digunakan komputer untuk belajar dan mengambil keputusan:</p>
             <ol>
-                <li style="font-size:15px"><b>Data</b> — bahan bakar utama komputer untuk berpikir.</li>
-                <li style="font-size:15px"><b>Algoritma</b> — langkah-langkah logis dalam menyelesaikan masalah.</li>
-                <li style="font-size:15px"><b><i>Machine Learning</i></b> — kemampuan komputer untuk belajar dari data.</li>
-                <li style="font-size:15px"><b><i>Computational Thinking</i></b> — cara berpikir logis yang meniru proses berpikir komputer.</li>
+                <li style="font-size:15px"><b>Data</b> — sumber informasi yang digunakan komputer untuk belajar dan mengambil keputusan.</li>
+                <li style="font-size:15px"><b>Algoritma</b> —  langkah-langkah logis yang digunakan komputer untuk menyelesaikan masalah.</li>
+                <li style="font-size:15px"><b><i>Machine Learning</i></b> — proses pembelajaran komputer dari data untuk mengenali pola dan membuat prediksi.</li>
+                <li style="font-size:15px"><b><i>Computational Thinking</i></b> — cara berpikir sistematis untuk menyelesaikan masalah seperti proses kerja komputer.</li>
             </ol>
         </div>
     </div>
@@ -286,12 +286,52 @@
 
 @push('scripts')
 <script>
+/* =============================================
+   AUDIO FEEDBACK 
+============================================= */
+function playCorrect(){
+    new Audio("{{ asset('audio/benar.mp3') }}").play().catch(() => {});
+}
+
+function playWrong(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+
+function playIncomplete(){
+    new Audio("{{ asset('audio/salah.mp3') }}").play().catch(() => {});
+}
+</script>
+<script>
+const MATERI_KEY = "pendahuluan"; // ← ganti sesuai halaman
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
+<script>
 const correctAnswers = { 1:"manusia", 2:"komputer", 3:"manusia", 4:"komputer" };
 const feedbackTexts = {
-    1: { title:"Bagus!", text:"Kamu tepat. YouTube memang memberi rekomendasi lewat komputer, tapi keputusan akhirnya tetap manusia yang memilih." },
-    2: { title:"Mantap!", text:"HP menggunakan teknologi pengenalan wajah yang bekerja berdasarkan algoritma dan data." },
-    3: { title:"Benar!", text:"Ini aktivitas yang butuh pengalaman dan penilaian manusia. Komputer tidak bisa melakukannya tanpa bantuan robot khusus." },
-    4: { title:"Tepat sekali!", text:"Google Maps menghitung jalur tercepat menggunakan algoritma dan data lalu lintas secara real-time." }
+    1: { title:"Bagus!", text:"Sistem rekomendasi pada YouTube memanfaatkan algoritma dan data perilaku pengguna untuk menyarankan konten yang relevan. Namun, keputusan akhir untuk memilih dan menonton video tetap berada pada pengguna sebagai pengambil keputusan." },
+    2: { title:"Benar!", text:"Fitur pengenalan wajah pada telepon pintar menggunakan teknologi kecerdasan buatan yang menganalisis karakteristik wajah berdasarkan algoritma dan data yang telah dipelajari untuk melakukan proses autentikasi pengguna." },
+    3: { title:"Benar!", text:"Aktivitas memisahkan pakaian sebelum mencuci memerlukan pertimbangan dan penilaian berdasarkan pengalaman manusia. Proses ini umumnya dilakukan secara manual dan tidak melibatkan sistem kecerdasan buatan secara langsung." },
+    4: { title:"Google Maps memanfaatkan algoritma pemrosesan data dan informasi lalu lintas secara real-time untuk menganalisis berbagai alternatif rute, kemudian merekomendasikan jalur yang diperkirakan paling efisien menuju tujuan." }
 };
 const totalQuestions = 4;
 
@@ -341,6 +381,7 @@ document.getElementById('btn-check').addEventListener('click', () => {
 
     if(!allAnswered){
         resetUI();
+        playIncomplete();
         openModal("error","Belum lengkap","Masih ada soal yang belum kamu jawab. Silakan pilih jawaban untuk semua situasi.");
         return;
     }
@@ -352,10 +393,11 @@ document.getElementById('btn-check').addEventListener('click', () => {
 
     if(!allCorrect){
         resetUI();
+        playWrong(); 
         openModal("error","Masih ada yang kurang tepat","Beberapa jawabanmu belum tepat. Coba cek lagi siapa yang melakukan tindakan utama.");
         return;
     }
-
+    playCorrect(); 
     document.querySelectorAll('.choice-circle.active').forEach(el => el.classList.add('is-correct'));
     for(let q=1; q<=totalQuestions; q++){
         const f = feedbackTexts[q];

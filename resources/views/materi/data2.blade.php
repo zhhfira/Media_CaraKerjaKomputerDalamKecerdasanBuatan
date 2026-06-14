@@ -2,7 +2,7 @@
 
 @section('title', 'Data: Pentingnya Data')
 
-@section('topbar', 'Data: Bahan Bakar Utama Kecerdasan Buatan')
+@section('topbar', 'Peran Data dalam Sistem Komputer')
 
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Alata&family=Itim&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -242,12 +242,24 @@
     }
 
     }
+    .content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
-    <h3>2. Pentingnya Data</h3>
+    <h3 class="content-title">2. Pentingnya Data</h3>
     <p class="style-materi">
         Data merupakan fondasi utama dalam kecerdasan buatan. Tanpa data yang cukup dan berkualitas, model kecerdasan buatan tidak dapat belajar dan
         menghasilkan prediksi yang akurat. Jenis data yang digunakan dapat berupa angka, teks, gambar, suara, dan lainnya — tergantung pada masalah yang ingin diselesaikan oleh sistem kecerdasan buatan (Bintoro <i>et al.</i>, 2024).
@@ -291,7 +303,7 @@
                 Gunakan Data Tidak Lengkap
             </button>
         </div>
-        <div class="hint">Klik salah satu tombol untuk menampilkan tabel & penjelasan.</div>
+        <div class="hint">Klik salah satu tombol untuk menampilkan tabel & penjelasan. <br>Perhatikan perbedaan antara data lengkap dan data tidak lengkap pada tabel berikut. Amati bagaimana kualitas data memengaruhi hasil pembelajaran kecerdasan buatan.</div>
 
         <!-- PANEL: Data Lengkap -->
         <div id="panelLengkap" class="panel" role="region" aria-live="polite">
@@ -367,16 +379,16 @@
         </div>
     </section>
 
-    <p class="style-materi">Untuk memahami mengapa kualitas dan kelengkapan data sangat penting dalam kecerdasan buatan, mari kita lakukan sebuah simulasi sederhana. Pada aktivitas berikut, kamu akan melihat bagaimana komputer mencoba "belajar" dari sekumpulan data. Perhatikan apa yang terjadi ketika sebagian data dihilangkan. Apakah hasil prediksi komputer tetap stabil, atau justru berubah-ubah? Simulasi ini bertujuan untuk menunjukkan bahwa komputer tidak bisa menebak secara asal, melainkan sangat bergantung pada data yang tersedia. </p>
+    <p class="style-materi">Untuk memahami pentingnya kelengkapan data dalam kecerdasan buatan, amati perbandingan grafik data lengkap dan grafik dengan sebagian data yang hilang <i>(missing data)</i>. Melalui kedua grafik tersebut, dapat terlihat bahwa pola lebih mudah dikenali ketika data lengkap, sedangkan data yang tidak lengkap membuat pola lebih sulit dikenali sehingga hasil prediksi menjadi kurang stabil. Aktivitas ini menunjukkan bahwa kualitas dan kelengkapan data sangat memengaruhi proses pembelajaran dan prediksi kecerdasan buatan.</p>
 
     <section class="activity-frame">
-        <h2>Konsep Data: Lengkap vs Tidak Lengkap</h2>
+        <h3>Aktivitas Interaktif 📊</h3>
+        <h3>Konsep Data: Lengkap vs Tidak Lengkap</h3>
         <p class="subtitle">
-            Komputer belajar dari data. Jika data tidak lengkap <i>(missing)</i>,
-            maka pola sulit dikenali dan hasil prediksi menjadi tidak stabil.
+            Tujuan Aktivitas: Peserta didik memahami pengaruh kelengkapan data terhadap kemampuan kecerdasan buatan dalam mengenali pola dan menghasilkan prediksi.
         </p>
         <p style="font-weight:700; margin-bottom:6px;">
-            📝 Petunjuk
+            📝 Langkah Aktivitas
         </p>
 
         <ol style="padding-left:18px; margin:0 0 14px; line-height:1.6;">
@@ -467,7 +479,7 @@
 </div>
 
 <div class="bottom-bar">
-    <a href="{{ route('materi.data3') }}" class="btn-next">
+    <a href="{{ route('materi.data2_2') }}" class="btn-next">
         Materi Selanjutnya
         <i class="fa-solid fa-arrow-right"></i>
     </a>
@@ -502,7 +514,30 @@
         document.getElementById(closeId)?.classList.remove('active');
     });
 </script>
+<script>
+const MATERI_KEY = "data.penting";
 
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
 <script>
 const N = 40;
 

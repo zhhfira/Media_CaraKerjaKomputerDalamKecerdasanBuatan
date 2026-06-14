@@ -75,7 +75,7 @@
 .welcome-text h2 { margin: 0 0 10px 0; }
 .welcome-text p { color: #666; }
 .welcome-image { flex: 1; text-align: right; margin-right: 20px; }
-.welcome-image img { max-width: 150px; height: auto; padding-right: 20px; }
+.welcome-image img { max-width: 150px; height: auto; padding-right: 20px; animation: float 3s ease-in-out infinite; }
 
 /* Responsive dashboard */
 @media(max-width:900px){
@@ -83,6 +83,11 @@
     .card-welcome { grid-column: 1; }
     .progress-card { grid-column: 1; }
     .row2 { grid-column: 1; grid-template-columns: 1fr; }
+}
+@keyframes float {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
 }
 </style>
 @endpush
@@ -147,7 +152,7 @@
         </div>
 
         <div class="card">
-            <h4>Rata-Rata Nilai</h4>
+            <h4>Perolehan Nilai (tertinggi)</h4>
             <div class="nilai-list">
                 <div>Kuis 1 <span>{{ number_format($rataQuiz1 ?? 0, 2) }}</span></div>
                 <div>Kuis 2 <span>{{ number_format($rataQuiz2 ?? 0, 2) }}</span></div>

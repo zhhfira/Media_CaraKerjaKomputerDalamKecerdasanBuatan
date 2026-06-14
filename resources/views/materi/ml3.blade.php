@@ -1,8 +1,8 @@
 @extends('layouts.siswa')
 
-@section('title', 'Machine Learning: Pohon Keputusan')
+@section('title', 'Model Pohon Keputusan dalam Machine Learning')
 
-@section('topbar', 'Machine Learning: Komputer yang Belajar')
+@section('topbar', 'Proses Pembelajaran Mesin dalam Sistem Komputer')
 
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Alata&family=Itim&family=Kumbh+Sans:wght,YOPQ@100..900,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -24,8 +24,8 @@
   margin-bottom:12px;
 }
 
-.activity-frame .dtv-title{ margin-top: -20px; font-size:18px; font-weight:800; color: #FFA239; }
-.activity-frame .dtv-sub{ margin:6px 0 0; font-size:13px; opacity:.85; line-height:1.5; }
+.activity-frame .dtv-title{ margin-top: -20px; font-size:18px; font-weight:800; }
+.activity-frame .dtv-sub{ margin:6px 0 13px; font-size:13px; opacity:.85; line-height:1.5; }
 
 .activity-frame .dtv-badge{
   padding:8px 10px;
@@ -232,15 +232,27 @@
   text-anchor: middle;
   dominant-baseline: middle;
 }
+.content-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(0, 100, 200, 0.1));
+    border-left: 4px solid #0099cc;
+    padding: 8px 16px 8px 14px;
+    border-radius: 5px 8px 8px 5px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 </style>
 @endpush
 
 @section('content')
 <div class="content-card">
-    <h3>3. Pohon Keputusan: Cara Komputer Menebak Jawaban</h3>
+    <h3 class="content-title">4. Model Pohon Keputusan dalam <i>Machine Learning</i></h3>
     <p class="style-materi">
         Model pohon keputusan <i>(decision tree)</i> merupakan salah satu teknik klasifikasi dalam bidang data <i>mining</i>, yaitu proses menggali pengetahuan <i>(knowledge)</i> dari sekumpulan data.
-        Pohon Keputusan <i>(Decision Tree)</i> adalah salah satu algoritma yang membuat komputer mampu mengambil keputusan selangkah demi selangkah, hampir seperti manusia saat sedang bernalar. Disebut "pohon" karena bentuk alurnya bercabang seperti batang pohon yang memiliki cabang-cabang kecil. Setiap cabang merepresentasikan sebuah pertanyaan yang harus dijawab oleh komputer sebelum pergi ke langkah berikutnya. Bayangkan kamu sedang bermain tebak-tebakan. Temanmu mencoba menebak hewan yang kamu pikirkan dengan memberikan pertanyaan satu per satu.
+        Pohon Keputusan <i>(Decision Tree)</i> adalah salah satu algoritma yang membuat komputer mampu mengambil keputusan selangkah demi selangkah, hampir seperti manusia saat sedang bernalar. Disebut "pohon" karena bentuk alurnya bercabang seperti batang pohon yang memiliki cabang-cabang kecil. Setiap jawaban mengarahkan komputer ke langkah berikutnya hingga diperoleh keputusan akhir. Cara kerjanya mirip permainan tebak-tebakan, di mana setiap pertanyaan mempersempit pilihan sampai ditemukan jawaban yang paling sesuai.
     </p>
 
     <section class="activity-frame">
@@ -249,6 +261,17 @@
                 <div>
                     <h3 class="dtv-title">Aktivitas Interaktif: Pohon Keputusan 🌳</h3>
                     <p class="dtv-sub">Klik <b>Ya/Tidak</b> untuk menelusuri cabang. Jalur keputusan akan menyala.</p>
+                    <p class="dtv-sub">Pada aktivitas ini, kamu diajak untuk memahami cara kerja pohon keputusan (decision tree) melalui simulasi interaktif. Pohon keputusan merupakan salah satu cara komputer atau sistem kecerdasan buatan mengambil keputusan secara bertahap berdasarkan pertanyaan dan jawaban yang diberikan.
+                    <br><br>
+                    Kamu akan menelusuri pohon keputusan dengan menjawab pertanyaan menggunakan pilihan <b>Ya</b> atau <b>Tidak</b>. Setiap jawaban akan menentukan cabang yang dilalui dan mengarahkan ke pertanyaan berikutnya. Proses ini terus berlangsung hingga kamu mencapai keputusan akhir berupa jenis hewan yang sesuai dengan ciri-ciri yang dipilih.
+                    Melalui aktivitas ini, kamu dapat memahami bahwa:
+                    <ul class="dtv-sub">
+                        <li>Setiap node pada pohon keputusan merepresentasikan pertanyaan.</li>
+                        <li>Setiap cabang menunjukkan pilihan jawaban (Ya/Tidak).</li>
+                        <li>Jalur keputusan terbentuk dari rangkaian jawaban yang dipilih.</li>
+                        <li>Keputusan akhir diperoleh setelah semua pertanyaan relevan terjawab.</li>
+                    </ul>
+                    </p>
                 </div>
                 <div class="dtv-badge" id="dtvStep">Langkah 1</div>
             </div>
@@ -315,20 +338,44 @@
 
 @push('scripts')
 <script>
+const MATERI_KEY = "ml.pohon"; 
+
+let sudahTercatat = false;
+
+window.addEventListener('scroll', function () {
+    if (sudahTercatat) return;
+
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollBottom >= pageHeight - 100) {
+        sudahTercatat = true;
+        fetch("{{ route('materi.progress.read') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ materi_key: MATERI_KEY })
+        });
+    }
+});
+</script>
+<script>
 // ===== DATA TREE =====
 const DTV = {
     start: "n1",
     nodes: {
         n1:      { type:"q",    label:"Q1", q:"Apakah hewannya menyusui anaknya?",     hint:"Ciri mamalia: menyusui.",                                             yes:"n2",      no:"n5",      x:430, y:60  },
-        n2:      { type:"q",    label:"Q2", q:"Apakah biasa dipelihara di rumah?",      hint:"Pet vs liar (contoh sederhana).",                                    yes:"n3",      no:"n4",      x:250, y:160 },
+        n2:      { type:"q",    label:"Q2", q:"Apakah biasa dipelihara di rumah?",      hint:"Pet vs liar.",                                    yes:"n3",      no:"n4",      x:250, y:160 },
         n5:      { type:"q",    label:"Q3", q:"Apakah hewan ini hidup di air?",         hint:"Bukan mamalia → cek habitat.",                                       yes:"fish",    no:"n6",      x:610, y:160 },
         n3:      { type:"q",    label:"Q4", q:"Apakah hewan ini mengeong?",             hint:"Suara khas bisa jadi fitur pembeda.",                                yes:"cat",     no:"dog",     x:150, y:270 },
         n4:      { type:"q",    label:"Q5", q:"Apakah hewan ini hidup di laut?",        hint:"Habitat adalah fitur penting.",                                      yes:"dolphin", no:"tiger",   x:350, y:270 },
-        n6:      { type:"q",    label:"Q6", q:"Apakah hewan ini punya sayap?",          hint:"Sayap → contoh sederhana mengarah ke burung.",                       yes:"bird",    no:"lizard",  x:700, y:270 },
+        n6:      { type:"q",    label:"Q6", q:"Apakah hewan ini punya sayap?",          hint:"Sayap → mengarah ke burung.",                       yes:"bird",    no:"lizard",  x:700, y:270 },
         cat:     { type:"leaf", label:"🐱", title:"Kucing",       desc:"Mamalia peliharaan yang mengeong.",                                    x:90,  y:370 },
         dog:     { type:"leaf", label:"🐶", title:"Anjing",       desc:"Mamalia peliharaan yang tidak mengeong.",                              x:210, y:370 },
         dolphin: { type:"leaf", label:"🐬", title:"Lumba-lumba",  desc:"Mamalia yang hidup di laut.",                                         x:310, y:370 },
-        tiger:   { type:"leaf", label:"🐯", title:"Harimau",      desc:"Mamalia liar darat (contoh sederhana).",                              x:390, y:370 },
+        tiger:   { type:"leaf", label:"🐯", title:"Harimau",      desc:"Mamalia liar darat.",                              x:390, y:370 },
         fish:    { type:"leaf", label:"🐟", title:"Ikan",         desc:"Tidak menyusui dan hidup di air.",                                    x:550, y:370 },
         bird:    { type:"leaf", label:"🐦", title:"Burung",       desc:"Tidak menyusui dan punya sayap.",                                     x:650, y:370 },
         lizard:  { type:"leaf", label:"🦎", title:"Kadal",        desc:"Tidak menyusui, tidak hidup di air, tidak bersayap.",                 x:770, y:370 }

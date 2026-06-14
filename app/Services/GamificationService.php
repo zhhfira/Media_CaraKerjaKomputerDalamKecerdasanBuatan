@@ -52,7 +52,7 @@ class GamificationService
 
     private function calculateLevel(int $xp): int
     {
-        if ($xp >= 350) return 3; // Mahir
+        if ($xp >= 500) return 3; // Mahir
         if ($xp >= 200) return 2; // Menengah
         return 1;                 // Pemula
     }
@@ -64,11 +64,11 @@ class GamificationService
 
     public function getProgressToNext(int $xp, int $level): array
     {
-        $starts  = [1 => 0,   2 => 200, 3 => 350];
-        $targets = [1 => 200, 2 => 350, 3 => 500];
+        $starts  = [1 => 0,   2 => 200, 3 => 500];
+        $targets = [1 => 200, 2 => 500, 3 => 600];
 
         if ($level >= 3) {
-            return ['pct' => 100, 'sisa' => 0, 'target' => 500];
+            return ['pct' => 100, 'sisa' => 0, 'target' => 600];
         }
 
         $pct = round(($xp - $starts[$level]) / ($targets[$level] - $starts[$level]) * 100);

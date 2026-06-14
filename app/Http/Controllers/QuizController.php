@@ -22,7 +22,7 @@ class QuizController extends Controller
     // ambil attempt TERAKHIR saja
     $attempt = QuizAttempt::where('user_id', auth()->id())
                 ->where('quiz_id', $quiz->id)
-                ->latest()
+                ->orderByDesc('score')
                 ->first();
    $nextQuiz = Quiz::where('id', '>', $quiz->id)
                     ->orderBy('id')
@@ -61,20 +61,41 @@ public function submit(Request $request, Quiz $quiz)
     ]);
 
     foreach ($quiz->questions as $question) {
-        $pickedOptionId = $data['answers'][$question->id] ?? null;
+            $pickedOptionId = $data['answers'][$question->id] ?? null;
 
-        if ($pickedOptionId) {
-            $isCorrect = Option::where('id', $pickedOptionId)
-                ->where('question_id', $question->id)
-                ->where('is_correct', 1)
-                ->exists();
+            if ($pickedOptionId) {
+                $isCorrect = Option::where('id', $pickedOptionId)
+                    ->where('question_id', $question->id)
+                    ->where('is_correct', 1)
+                    ->exists();
 
-            if ($isCorrect) $correct++;
+                if ($isCorrect) $correct++;
+
+                AttemptAnswer::create([
+                    'quiz_attempt_id' => $attempt->id,
+                    'question_id'     => $question->id,
+                    'option_id'       => $pickedOptionId,
+                ]);
+            }
+        }
+
+    $score = $total > 0 ? round(($correct / $total) * 100, 2) : 0;
+
+    // Cek apakah ini pengulangan setelah gagal
+    $attempts = QuizAttempt::where('user_id', auth()->id())
+        ->where('quiz_id', $quiz->id)
+        ->where('id', '!=', $attempt->id)
+        ->get();
+
+    if ($attempts->count() > 0) {
+        $bestSebelumnya = $attempts->max('score');
+        $kkm = $quiz->kkm;
+
+        // Kalau belum pernah lulus, batasi skor maksimal = KKM
+        if ($bestSebelumnya < $kkm) {
+            $score = min($score, $kkm);
         }
     }
-
-    $score = $correct * (int)$quiz->points_per_question;
-
     $attempt->update([
         'correct_count' => $correct,
         'score' => $score,

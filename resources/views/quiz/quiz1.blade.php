@@ -316,12 +316,14 @@
             <li>Atur waktu dengan baik agar semua soal terjawab sebelum waktu habis.</li>
             <li>Jangan keluar atau berpindah aplikasi selama kuis berlangsung.</li>
             <li>Setelah waktu habis, aplikasi akan otomatis menyimpan jawaban.</li>
+            <li>Kerjakan soal semaksimal mungkin. Jika nilai kamu memenuhi KKM (<b>{{ $quiz->kkm }}</b>), kamu akan mendapatkan <b>badge</b> sebagai penghargaan atas pencapaianmu!</li>
+            <li>Jika belum memenuhi KKM, kamu dapat mengulang kuis. Namun nilai maksimal saat mengulang adalah sebesar KKM.</li>
           </ul>
 
           <!-- Nama siswa otomatis dari login -->
           <input id="inpName" type="hidden" value="{{ Auth::user()->username }}">
           <input id="inpClass" type="hidden" value="{{ Auth::user()->kelas }}">
-
+          <input id="inpNisn" type="hidden" value="{{ Auth::user()->nisn }}">
         </div>
 
         <div class="cardFooter">
@@ -355,8 +357,9 @@
           </div>
 
           <div class="quizNav">
-            <button class="btn btn-info" id="btnPrev" type="button">Sebelumnya</button>
-            <button class="btn btn-primary" id="btnNext" type="button">Selanjutnya</button>
+              <button class="btn btn-info" id="btnPrev" type="button">Sebelumnya</button>
+              <button class="btn btn-primary" id="btnNext" type="button">Selanjutnya</button>
+              <button class="btn btn-danger" id="btnSelesai" type="button" style="display:none;">Selesai</button>
           </div>
         </div>
 
@@ -392,6 +395,7 @@
           <div class="resultInner">
             <table class="resultTable">
               <tr><td>Nama Siswa</td><td>:</td><td id="rName">-</td></tr>
+              <tr><td>NISN</td><td>:</td><td id="rNisn">-</td></tr>
               <tr><td>Kelas</td><td>:</td><td id="rClass">-</td></tr>
               <tr><td>Hari, Tgl</td><td>:</td><td id="rDate">-</td></tr>
               <tr><td>Waktu Mengerjakan</td><td>:</td><td id="duration">-</td></tr>
@@ -411,7 +415,12 @@
               </button>
 
               <button class="btn btn-info" id="btnNextMaterial" type="button">
-                <i class="fa fa-arrow-right"></i> Materi Selanjutnya
+                  <i class="fa fa-arrow-right"></i> 
+                  @if($quiz->id == 4)
+                      Kerjakan Evaluasi
+                  @else
+                      Materi Selanjutnya
+                  @endif
               </button>
             </div>
           </div>
@@ -441,6 +450,7 @@ const EXISTING_ATTEMPT = @json($attempt ?? null);
 @php
     $prevRoute = null;
     $nextRoute = null;
+    $nextUrl   = null;
 
     switch($quiz->id) {
         case 1:
@@ -457,8 +467,14 @@ const EXISTING_ATTEMPT = @json($attempt ?? null);
             $prevRoute = 'materi.ml3';
             $nextRoute = 'materi.ct';
             break;
+
+        case 4:
+            $prevRoute = 'materi.ct3';
+            $nextUrl = route('quiz.show', ['quiz' => 5]); 
+            break;
     }
 @endphp
+
 <script>
 const QUIZ_DATA = @json($quiz);
 
@@ -487,7 +503,7 @@ const scoreBadge = document.getElementById("scoreBadge");
 const resultMsg = document.getElementById("resultMsg");
 
 introDuration.textContent = SETTINGS.durationMinutes;
-quizTitleEl.textContent = "KUIS : " + (QUIZ_DATA.title ?? "");
+quizTitleEl.textContent =  (QUIZ_DATA.title ?? "");
 
 function showPage(page){
   [pageIntro, pageQuiz, pageResult].forEach(p => p.classList.remove("active"));
@@ -507,16 +523,20 @@ function formatMMSS(seconds){
 
 function startTimer(){
   startedAt = Date.now();
-  let remaining = SETTINGS.durationMinutes * 60;
+
+  const savedRemaining = localStorage.getItem(TIMER_KEY);
+  let remaining = savedRemaining ? parseInt(savedRemaining) : SETTINGS.durationMinutes * 60;
 
   timerEl.textContent = formatMMSS(remaining);
 
   timerId = setInterval(() => {
     remaining--;
     timerEl.textContent = formatMMSS(remaining);
+    localStorage.setItem(TIMER_KEY, remaining);
 
     if(remaining <= 0){
       clearInterval(timerId);
+      clearStorage();
       finishQuiz();
     }
   },1000);
@@ -535,9 +555,35 @@ let currentIndex = 0;
 let answers = {};
 let answered = [];
 
+const STORAGE_KEY = 'quiz_answers_' + QUIZ_DATA.id;
+const TIMER_KEY   = 'quiz_timer_'   + QUIZ_DATA.id;
+
+function saveToStorage() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, answered, currentIndex }));
+}
+
+function loadFromStorage() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        answers      = parsed.answers      || {};
+        answered     = parsed.answered     || new Array(SETTINGS.totalQuestions).fill(false);
+        currentIndex = parsed.currentIndex || 0;
+        return true;
+    }
+    return false;
+}
+
+function clearStorage() {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(TIMER_KEY);
+}
+
 function buildNumGrid(){
   numGridEl.innerHTML = "";
-  answered = new Array(SETTINGS.totalQuestions).fill(false);
+  if (answered.length === 0) {
+    answered = new Array(SETTINGS.totalQuestions).fill(false);
+  }
 
   for(let i=0;i<SETTINGS.totalQuestions;i++){
     const btn = document.createElement("button");
@@ -585,18 +631,26 @@ function renderQuestion(index){
   const wrap = document.getElementById("options");
   wrap.innerHTML = "";
 
-  q.options.forEach(opt=>{
-    const label = document.createElement("label");
-    label.className = "opt";
+    q.options.forEach(opt=>{
+        const label = document.createElement("label");
+        label.className = "opt";
 
-    label.innerHTML = `
-      <input type="radio" name="opt_${q.id}" value="${opt.id}">
-      <span><b>${opt.option_label}.</b> ${opt.option_text}</span>
-    `;
+        // Cek apakah opsi ini sudah pernah dipilih
+        const isChecked = answers[q.id] === opt.id ? "checked" : "";
 
-    wrap.appendChild(label);
-  });
-}
+        label.innerHTML = `
+          <input type="radio" name="opt_${q.id}" value="${opt.id}" ${isChecked}>
+          <span><b>${opt.option_label}.</b> ${opt.option_text}</span>
+        `;
+
+        wrap.appendChild(label);
+      });
+      document.getElementById("btnPrev").style.display = index === 0 ? "none" : "";
+
+      const isLast = index === SETTINGS.totalQuestions - 1;
+      document.getElementById("btnNext").style.display = isLast ? "none" : "";
+      document.getElementById("btnSelesai").style.display = isLast ? "" : "none";
+      }
 
 document.getElementById("options").addEventListener("change",(e)=>{
   if(!e.target.matches("input[type='radio']")) return;
@@ -605,6 +659,7 @@ document.getElementById("options").addEventListener("change",(e)=>{
   answers[q.id] = Number(e.target.value);
   answered[currentIndex] = true;
   refreshNumGrid();
+  saveToStorage();
 });
 
 /* ================= SUBMIT ================= */
@@ -635,8 +690,11 @@ async function submitQuiz(){
 
 /* ================= FINISH ================= */
 
-async function finishQuiz(){
+let isSubmitting = false;
 
+async function finishQuiz(){
+  if (isSubmitting) return;
+  isSubmitting = true;
   stopTimer();
 
   const spent = startedAt ? Math.floor((Date.now() - startedAt)/1000) : 0;
@@ -648,6 +706,7 @@ async function finishQuiz(){
   const bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"][now.getMonth()];
 
   rName.textContent = inpName.value;
+  document.getElementById("rNisn").textContent = document.getElementById("inpNisn").value || "-";
   rClass.textContent = inpClass.value || "-";
   rDate.textContent = `${hari}, ${now.getDate()} ${bulan} ${now.getFullYear()}`;
   rDuration.textContent = `${menit} menit ${detik} detik`;
@@ -678,6 +737,7 @@ async function finishQuiz(){
 
 document.getElementById("btnStartFromIntro").onclick = ()=>{
   showPage(pageQuiz);
+  loadFromStorage();
   buildNumGrid();
   renderQuestion(0);
   startTimer();
@@ -705,6 +765,7 @@ document.getElementById("btnPrev").onclick = ()=>{
     currentIndex--;
     renderQuestion(currentIndex);
     refreshNumGrid();
+    saveToStorage(); // ← tambah
   }
 };
 
@@ -713,7 +774,12 @@ document.getElementById("btnNext").onclick = ()=>{
     currentIndex++;
     renderQuestion(currentIndex);
     refreshNumGrid();
+    saveToStorage(); // ← tambah
   }
+};
+
+document.getElementById("btnSelesai").onclick = () => {
+    modal.style.display = "flex";
 };
 
 document.getElementById("btnCancel").onclick = ()=>{
@@ -733,7 +799,11 @@ document.getElementById("btnPrevMaterial").onclick = () => {
 document.getElementById("btnPrevMaterial").style.display = "none";
 @endif
 
-@if($nextRoute)
+@if(isset($nextUrl) && $nextUrl)
+document.getElementById("btnNextMaterial").onclick = () => {
+    window.location.href = "{{ $nextUrl }}";
+};
+@elseif($nextRoute)
 document.getElementById("btnNextMaterial").onclick = () => {
     window.location.href = "{{ route($nextRoute) }}";
 };
@@ -744,26 +814,20 @@ document.getElementById("btnNextMaterial").style.display = "none";
 timerEl.textContent = "--:--";
 
 function resetQuiz(){
-
-  // reset index ke nomor 1
   currentIndex = 0;
-
-  // kosongkan jawaban
   answers = {};
-
-  // reset status answered
   answered = new Array(SETTINGS.totalQuestions).fill(false);
-
-  // reset timer
   stopTimer();
   timerEl.textContent = "--:--";
-
+  clearStorage();
 }
+
 window.onload = function(){
 
   if (EXISTING_ATTEMPT) {
 
     rName.textContent = EXISTING_ATTEMPT.student_name;
+    document.getElementById("rNisn").textContent = document.getElementById("inpNisn").value || "-";
     rClass.textContent = inpClass.value || "-";
 
     const finishedAt = new Date(EXISTING_ATTEMPT.finished_at);
@@ -797,6 +861,12 @@ if (EXISTING_ATTEMPT.started_at && EXISTING_ATTEMPT.finished_at) {
 
     showPage(pageResult);
 
+} else if (localStorage.getItem(STORAGE_KEY)) {
+    loadFromStorage();
+    showPage(pageQuiz);
+    buildNumGrid();
+    renderQuestion(currentIndex);
+    startTimer();
   } else {
     showPage(pageIntro);
   }

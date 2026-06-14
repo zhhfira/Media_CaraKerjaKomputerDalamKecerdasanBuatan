@@ -6,11 +6,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\MateriProgressController;
 use Illuminate\Support\Facades\Route;
+
 
 /* LANDING (publik) */
 Route::get('/', fn () => view('landing'))->name('landing');
 Route::get('/tentang', fn () => view('tentang'))->name('tentang');
+Route::get('/petunjuk', fn () => view('petunjuk'))->name('petunjuk');
 
 /* GUEST (belum login) */
 Route::middleware('guest')->group(function () {
@@ -41,7 +44,6 @@ Route::middleware('auth')->group(function () {
 
         // (Kalau kamu sudah punya halaman list quiz, ini aktif)
         Route::get('/quizzes', [QuizAdminController::class, 'index'])->name('quizzes.index');
-        Route::get('/quizzes/create', [QuizAdminController::class, 'create'])->name('quizzes.create');
         Route::post('/quizzes', [QuizAdminController::class, 'store'])->name('quizzes.store');
         Route::get('/quizzes/{quiz}/edit', [QuizAdminController::class, 'edit'])->name('quizzes.edit');
         Route::put('/quizzes/{quiz}', [QuizAdminController::class, 'update'])->name('quizzes.update');
@@ -60,6 +62,8 @@ Route::middleware('auth')->group(function () {
         // Data siswa & nilai (view kamu: guru/datasiswa, guru/nilaisiswa)
         Route::get('/datasiswa', [GuruController::class, 'datasiswa'])->name('datasiswa');
         Route::get('/nilaisiswa', [GuruController::class, 'nilaisiswa'])->name('nilaisiswa');
+
+        Route::get('/progres-siswa', [GuruController::class, 'progresSiswa'])->name('progresSiswa');
     });
 
     // Materi umum (auth)
@@ -67,15 +71,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/pendahuluan', fn () => view('materi.pendahuluan'))->name('pendahuluan');
         Route::get('/data', fn () => view('materi.data'))->name('data');
         Route::get('/data2', fn () => view('materi.data2'))->name('data2');
+        Route::get('/data2_2', fn () => view('materi.data2_2'))->name('data2_2');
         Route::get('/data3', fn () => view('materi.data3'))->name('data3');
         Route::get('/algoritma', fn () => view('materi.algoritma'))->name('algoritma');
         Route::get('/algoritma2', fn () => view('materi.algoritma2'))->name('algoritma2');
         Route::get('/ml', fn () => view('materi.ml'))->name('ml');
+        Route::get('/ml1_2', fn () => view('materi.ml1_2'))->name('ml1_2');
         Route::get('/ml2', fn () => view('materi.ml2'))->name('ml2');
         Route::get('/ml3', fn () => view('materi.ml3'))->name('ml3');
         Route::get('/ct', fn () => view('materi.ct'))->name('ct');
         Route::get('/ct2', fn () => view('materi.ct2'))->name('ct2');
+        Route::get('/ct3', fn () => view('materi.ct3'))->name('ct3');
     });
+    Route::post('/materi/progress/read', [MateriProgressController::class, 'markRead'])
+        ->name('materi.progress.read')
+        ->middleware('auth');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
